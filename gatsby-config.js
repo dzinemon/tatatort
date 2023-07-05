@@ -1,6 +1,17 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+if (process.env.STAGING) {
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}.staging`,
+  })
+} else {
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+}
+
 module.exports = {
   siteMetadata: {
     siteUrl: `https://www.yourdomain.tld`,
@@ -10,8 +21,8 @@ module.exports = {
   plugins: [{
     resolve: 'gatsby-source-contentful',
     options: {
-      "accessToken": "AygsNyMYepUzJD67HpSsmlTZos3B-qAVclijgGg2AXQ",
-      "spaceId": "k9kptl22xzvk"
+      "accessToken": process.env.CONTENTFUL_ACCESS_TOKEN,
+      "spaceId": process.env.CONTENTFUL_SPACE_ID
     }
   }, "gatsby-plugin-image", {
     resolve: 'gatsby-plugin-google-analytics',

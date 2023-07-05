@@ -70,22 +70,22 @@ export default function IndexPage({ data }) {
     <Layout>
     
       <div className="container py-16 lg:py-20 xl:py-28">
-        <div className="flex flex-wrap items-center -mx-4">
-          <div className="w-full lg:w-1/2 lg:text-left text-center">
+        <div className="flex flex-wrap items-center justify-center -mx-4">
+          <div className="w-full max-w-2xl text-center">
             <h1 className='font-poiret lg:text-6xl text-4xl'>Тататорт</h1>
             <p className="mb-8 lg:mb-10 opacity-80 text-sm">Оригінальні торти на замовлення у Києві</p>
-            <div className='space-y-5 text-lg max-w-xl'>
+            <div className='space-y-5 text-lg max-w-2xl mx-auto'>
               <p>Друзі, цей сайт присвячений моєму солодкому хобі. Тут кожен зможе знайти торти для себе.</p>
               <p>Оригінальний дизайн, смачна начинка, позитивні емоції – це Тататорт!</p>
               <p>Замовити торт або кендібар:
                 {" "}
-              {socialItems.map((soc, idx) => <a href={soc.url} className='mx-1 text-teal-600 hover:underline'>{soc.name}</a>)}
+              {socialItems.map((soc, idx) => <a href={soc.url} className='mx-1 text-cyan-600 hover:underline'>{soc.name}</a>)}
               </p>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 aspect-video bg-teal-500">
+          {/* <div className="w-full lg:w-1/2 aspect-video bg-teal-500">
 
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -56,7 +56,7 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
       <li className="block lg:border-none border-b border-rose lg:inline-block lg:border-none w-full lg:w-auto text-center">
         <a
           className={`${
-            isActive ? "text-teal-700" : "text-slate-900"
+            isActive ? "text-cyan-600" : "text-slate-900"
           }
             text-grey-3 inline-block hover:opacity-80 w-full px-6 lg:px-6 py-4 lg:py-7 leading-tight text-left border-b lg:border-none border-white focus:outline-none`}
           href={data.url}
@@ -89,7 +89,7 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
         className={`${
           idx === 0 ? "lg:px-6" : "lg:px-6"
         } ${
-          isActive ? "text-teal-700" : "text-slate-900"
+          isActive ? "text-cyan-600" : "text-slate-900"
         } px-6 text-left hover:opacity-80 w-full lg:w-auto focus:outline-none py-4 lg:py-7 leading-tight border-b lg:border-none border-white pointer-events-none lg:pointer-events-auto`}
       >
         {data.name}{" "}
