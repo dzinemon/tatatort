@@ -7,6 +7,7 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import Layout from '../components/layout'
+import SeoComponent from '../components/SeoComponent';
 
 const CakeCategoryCard = ( {data} ) => {
 
@@ -56,8 +57,8 @@ const FillingCategoryCard = ( {data} ) => {
 }
 
 const socialItems = [
-  { name: <><FontAwesomeIcon icon={faInstagram} size="md" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
-  { name: <><FontAwesomeIcon icon={faFacebook} size="md" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
+  { name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
+  { name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
 ]
 
 export default function IndexPage({ data }) {
@@ -69,7 +70,10 @@ export default function IndexPage({ data }) {
   
   return (
     <Layout>
-    
+      <SeoComponent
+        title={`Торти на замовлення в Києві - Тататорт`}
+        description={`Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!`}
+      />
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
@@ -80,7 +84,7 @@ export default function IndexPage({ data }) {
               <p>Оригінальний дизайн, смачна начинка, позитивні емоції – це Тататорт!</p>
               <p>Замовити торт або кендібар:
                 {" "}
-              {socialItems.map((soc, idx) => <a href={soc.url} className='mx-1 text-cyan-600 hover:underline'>{soc.name}</a>)}
+              {socialItems.map((soc, idx) => <a href={soc.url} key={`social-${idx}`} className='mx-1 text-cyan-600 hover:underline'>{soc.name}</a>)}
               </p>
             </div>
           </div>
@@ -97,7 +101,7 @@ export default function IndexPage({ data }) {
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {
               cakes.map((el, idx, arr) => {
-                return <CakeCategoryCard data={el.node} />
+                return <CakeCategoryCard data={el.node} key={`cake-category-${idx}`} />
               })
             }
           </div>
@@ -111,7 +115,7 @@ export default function IndexPage({ data }) {
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {
               fillings.map((el, idx, arr) => {
-                return <CakeCategoryCard data={el.node} />
+                return <CakeCategoryCard data={el.node} key={`filling-category-${idx}`} />
               })
             }
           </div>

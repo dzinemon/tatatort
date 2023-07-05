@@ -14,8 +14,8 @@ if (process.env.STAGING) {
 
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://www.yourdomain.tld`,
-    url: `http://tatatort.com.ua/`,
+    siteUrl: `https://tatatort.com.ua`,
+    url: `https://tatatort.com.ua`,
     image: '/image.png'
   },
   plugins: [{

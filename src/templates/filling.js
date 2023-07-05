@@ -6,6 +6,7 @@ import Modal from '../components/Modal'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
 
 import Layout from '../components/layout'
+import SeoComponent from '../components/SeoComponent';
 
 export default function FillingPage({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,6 +46,10 @@ export default function FillingPage({ data }) {
   
   return (
     <Layout>
+      <SeoComponent
+        title={`${data.contentfulCategory.title}`}
+        description={`${data.contentfulCategory.description} - Начинки від Тататорт`}
+      />
     
       <div className="container py-16 lg:py-20">
         <h1 className='text-4xl lg:text-6xl font-poiret text-center '>{data.contentfulCategory.title}</h1>
@@ -56,15 +61,15 @@ export default function FillingPage({ data }) {
             images.map((el, idx, arr) => {
               return (
                 <div className='relative group shadow-lg flex flex-col'>
-                  <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-t-lg overflow-hidden' key={`images-${idx}`}>
+                  <div className='bg-gradient-to-r relative from-blue-200 to-cyan-200 aspect-square rounded-t-lg overflow-hidden' key={`images-${idx}`}>
                     <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={el.gatsbyImageData} alt={`${ el.title && el.title } ${el.description && el.description}`} />
+                    <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded bg-white/20 backdrop-blur-xs' onClick={() => {
+                      setModalOpen(true)
+                      setModalItem(idx)
+                      } }>
+                        <ArrowsPointingOutIcon className="h-12 w-12 text-white" />
+                    </button>
                   </div>
-                  <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded bg-white/20 backdrop-blur-xs' onClick={() => {
-                    setModalOpen(true)
-                    setModalItem(idx)
-                    } }>
-                      <ArrowsPointingOutIcon className="h-12 w-12 text-white" />
-                  </button>
                   <div className='space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-4 rounded-b-lg'>
                   <p className='text-lg lg:text-2xl font-poiret'>{el.title}</p>
                   <p className='font-light text-sm lg:text-base'> {el.description}</p>
@@ -105,6 +110,7 @@ export const query = graphql`
       node_locale
       name
       title
+      description
       type
       images {
         gatsbyImageData

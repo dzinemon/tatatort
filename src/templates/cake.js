@@ -7,6 +7,7 @@ import PageHero from '../components/PageHero'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
 
 import Layout from '../components/layout'
+import SeoComponent from '../components/SeoComponent';
 
 export default function CakesPage({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,7 +47,10 @@ export default function CakesPage({ data }) {
   
   return (
     <Layout>
-    
+      <SeoComponent
+        title={`${data.contentfulCategory.title}`}
+        description={`${data.contentfulCategory.description} - Торти від Тататорт`}
+      />
       <PageHero title={data.contentfulCategory.title} />
       
 
@@ -94,6 +98,7 @@ export const query = graphql`
       slug
       name
       title
+      description
       type
       images {
         gatsbyImageData
