@@ -48,11 +48,11 @@ const navbarItems = [
             "Корпоративні торти",
         },
         {
-          title: "Святкові",
+          title: "Торти для жінок",
           icon: "",
           url: "/celebration/",
           text:
-            "Святкові торти",
+            "Святкові торти для жінок",
         },
         {
           title: "Для чоловіків",
@@ -133,7 +133,7 @@ const navbarItems = [
 
         subItems: [
             {
-                title: "Легкі начинки з додаванням фруктів та ягід",
+                title: "Фруктові та ягідні начинки",
                 icon: "",
                 url: "/fruits-and-berries/",
                 text: `<p>Легкі начинки з додаванням фруктів та ягід</p>`
@@ -266,7 +266,7 @@ const Navigation = ({ children }) => {
                                     isActive ? "flex" : "hidden"
                                 } lg:block nav-collapse absolute lg:static top-16 lg:top-auto inset-x-0 bg-white lg:bg-transparent z-30`}
                             >
-                                <div className=" flex lg:flex-row flex-col lg:justify-center items-center w-full h-full relative lg:static z-50">
+                                <ul className=" flex lg:flex-row flex-col lg:justify-center items-center w-full h-full relative lg:static z-50">
                                     {navbarItems.map((item, idx) => <NavbarItem 
                                         data={item} 
                                         key={idx} 
@@ -274,7 +274,7 @@ const Navigation = ({ children }) => {
                                         activeItem={activeItem} 
                                         setActiveItem={setActiveItem} />
                                     )}
-                                </div>
+                                </ul>
                             </div>
                         </div>
                     </div>

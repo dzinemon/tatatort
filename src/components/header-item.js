@@ -125,7 +125,7 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
                         { item.icon && <div className="w-auto px-2 text-2xl font-bold">
                           {item.icon}
                         </div>}
-                        <div className="w-auto px-2 xl:text-xl my-2">
+                        <div className="w-auto px-2 xl:text-xl mb-2">
                           {item.title}
                         </div>
                       </div>
