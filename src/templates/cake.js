@@ -59,7 +59,7 @@ export default function CakesPage({ data }) {
           { images &&
             images.map((el, idx, arr) => {
               return (
-                <div className='relative group'>
+                <div className='relative group' key={`cake-${idx}`}>
                   <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square shadow-lg rounded-lg overflow-hidden' key={`images-${idx}`}>
                     <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={el.gatsbyImageData} alt={`${ el.title && el.title } ${el.description && el.description}`} />
                   </div>

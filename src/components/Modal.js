@@ -33,7 +33,7 @@ export default function Modal({ setNext, setPrev, modalItem, open, children, onC
           
           <div className="flex items-center justify-center relative">
             {children}
-            <div className="absolute inset-0">
+            <div className="absolute inset-x-0 inset-y-16">
               <div className="flex flex-row justify-between h-full">
                 
                   <button 

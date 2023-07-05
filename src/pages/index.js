@@ -153,7 +153,7 @@ export const query = graphql`
           type
           title
           images {
-            gatsbyImageData
+            gatsbyImageData(width: 282, height: 282)
             title
             description
           }

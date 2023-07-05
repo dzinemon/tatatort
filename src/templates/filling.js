@@ -60,7 +60,7 @@ export default function FillingPage({ data }) {
           { images &&
             images.map((el, idx, arr) => {
               return (
-                <div className='relative group shadow-lg flex flex-col'>
+                <div className='relative group shadow-lg flex flex-col' key={`filling-${idx}`}>
                   <div className='bg-gradient-to-r relative from-blue-200 to-cyan-200 aspect-square rounded-t-lg overflow-hidden' key={`images-${idx}`}>
                     <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={el.gatsbyImageData} alt={`${ el.title && el.title } ${el.description && el.description}`} />
                     <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded bg-white/20 backdrop-blur-xs' onClick={() => {
