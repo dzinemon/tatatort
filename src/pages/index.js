@@ -17,11 +17,11 @@ const CakeCategoryCard = ( {data} ) => {
         <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={image.gatsbyImageData} alt={`${ image.title && image.title } ${image.description && image.description}`} />
       </div>
       <div className='absolute inset-0'>
-        <div className='flex h-full p-6 items-center justify-center'>
+        <div className='flex h-full p-3 lg:p-6 items-center justify-center'>
           <div className='w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full'>
             <div className='relative w-full'>
-              <p className="px-4 font-bold text-2xl font-poiret">{data.title}</p>
-              <p className="px-4 text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
+              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">{data.title}</p>
+              <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
                 Детальніше
               </p>
             </div>
@@ -69,12 +69,12 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
     
-      <div className="container py-16 lg:py-20 xl:py-28">
+      <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
             <h1 className='font-poiret lg:text-6xl text-4xl'>Тататорт</h1>
             <p className="mb-8 lg:mb-10 opacity-80 text-sm">Оригінальні торти на замовлення у Києві</p>
-            <div className='space-y-5 text-lg max-w-2xl mx-auto'>
+            <div className='space-y-5 lg:text-lg max-w-2xl mx-auto'>
               <p>Друзі, цей сайт присвячений моєму солодкому хобі. Тут кожен зможе знайти торти для себе.</p>
               <p>Оригінальний дизайн, смачна начинка, позитивні емоції – це Тататорт!</p>
               <p>Замовити торт або кендібар:
@@ -100,7 +100,6 @@ export default function IndexPage({ data }) {
               })
             }
           </div>
-          <div>{JSON.stringify(cakes.title, null, 2)}</div>
         </div>
       </section>
 
@@ -111,11 +110,10 @@ export default function IndexPage({ data }) {
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {
               fillings.map((el, idx, arr) => {
-                return <FillingCategoryCard data={el.node} />
+                return <CakeCategoryCard data={el.node} />
               })
             }
           </div>
-          <div>{JSON.stringify(fillings.title, null, 2)}</div>
         </div>
       </section>
 
