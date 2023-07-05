@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-  
+import '@fortawesome/fontawesome-svg-core/styles.css'  
 
 import NavbarItem from "../components/header-item"
 
