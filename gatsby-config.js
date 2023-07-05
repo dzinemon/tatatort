@@ -3,12 +3,14 @@
  */
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.yourdomain.tld`,
+    url: `http://tatatort.com.ua/`,
+    image: '/image.png'
   },
   plugins: [{
     resolve: 'gatsby-source-contentful',
     options: {
-      "accessToken": "in3ZM1FfOyIlc5-1lIOuUEfi4i_vBJACVINSRLdsLh8",
+      "accessToken": "AygsNyMYepUzJD67HpSsmlTZos3B-qAVclijgGg2AXQ",
       "spaceId": "k9kptl22xzvk"
     }
   }, "gatsby-plugin-image", {
@@ -19,7 +21,7 @@ module.exports = {
   }, "gatsby-plugin-react-helmet", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
-      "icon": "src/images/icon.png"
+      "icon": "src/images/logowhitebg.png"
     }
   }, "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
@@ -28,5 +30,7 @@ module.exports = {
       "path": "./src/images/"
     },
     __key: "images"
-  }]
+  },
+  'gatsby-plugin-postcss'
+]
 };
