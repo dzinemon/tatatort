@@ -42,7 +42,7 @@ export default function FillingPage({ data }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [modalItem]);
+  }, [modalItem, modalOpen]);
   
   return (
     <Layout>

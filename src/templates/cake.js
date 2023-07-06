@@ -43,7 +43,7 @@ export default function CakesPage({ data }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [modalItem]);
+  }, [modalItem, modalOpen]);
   
   return (
     <Layout>

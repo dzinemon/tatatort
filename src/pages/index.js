@@ -94,9 +94,11 @@ export default function IndexPage({ data }) {
         </div>
       </div>
 
-      <section className="py-10">
+      <section className="py-10 relative">
+        <div className="absolute w-56 h-96 transform rotate-12 bg-rose-200 opacity-50 blur-2xl rounded-full"></div>
+        <div className="absolute w-56 h-96 transform rotate-12 bg-teak-200 opacity-50 blur-2xl rounded-full bottom-0 right-0"></div>
         <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'>Торти Тататорт</h2>
-        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/50">
+        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
         
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {
@@ -106,11 +108,12 @@ export default function IndexPage({ data }) {
             }
           </div>
         </div>
+        
       </section>
 
       <section className="py-10">
         <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'> Начинки Тататорт</h2>
-        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/50">
+        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
         
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {
