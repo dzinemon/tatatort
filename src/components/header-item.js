@@ -100,7 +100,9 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
           </span>
         </span>
       </button>
-      <div className="lg:absolute lg:left-0 right-0 text-left lg:top-21 dr-dwn">
+      <div className={` ${
+        isActive ? " max-h-screen-" : " max-h-0-"
+      } lg:absolute lg:left-0 right-0 text-left lg:top-21 dr-dwn`}>
         <div
           className="container lg:rounded-xl bg-white/90 backdrop-blur-xl p-2 md:p-4 lg:p-8"
           
@@ -121,7 +123,7 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
                       className="hover:bg-cyan-50 bg-backdrop-blur-xl text-slate-800 focus:text-white w-full block rounded-lg xl:px-5 xl:py-4 px-3 py-2 focus:bg-gray-800 focus:outline-none"
                       href={`${item.url}`}
                     >
-                      <div className="flex justify-start items-center -mx-2">
+                      <div className={`flex justify-start items-center -mx-2`}>
                         { item.icon && <div className="w-auto px-2 text-2xl font-bold">
                           {item.icon}
                         </div>}
@@ -130,7 +132,7 @@ const NavbarItem = ({ data, dark, idx, activeItem, setActiveItem }) => {
                         </div>
                       </div>
                       <div
-                        className="opacity-70 text-sm xl:text-base"
+                        className={`${ isActive ? "opacity-60 translate-x-0" : "opacity-0 translate-x-3" } delay-300 duration-700 transition-all text-sm xl:text-base`}
                         dangerouslySetInnerHTML={{ __html: item.text }}
                       />
                     </a>

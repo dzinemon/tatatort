@@ -18,11 +18,12 @@ body {
 }
 
 .dr-dwn {
-  @apply hidden;
+  @apply max-h-0 overflow-hidden opacity-0;
+  transition: max-height 0.5s ease-in-out, opacity 0.2s ease-in;
 }
 
 .is-active > .dr-dwn{
-  @apply block;
+  @apply max-h-screen opacity-100;
 }
 
 #navbar {
