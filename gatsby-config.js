@@ -25,9 +25,11 @@ module.exports = {
       "spaceId": process.env.CONTENTFUL_SPACE_ID
     }
   }, "gatsby-plugin-image", {
-    resolve: 'gatsby-plugin-google-analytics',
+    resolve: `gatsby-plugin-google-gtag`,
     options: {
-      "trackingId": "387120216"
+      trackingIds: [
+        "G-98YQDHYXK7"
+      ]
     }
   }, "gatsby-plugin-react-helmet", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
