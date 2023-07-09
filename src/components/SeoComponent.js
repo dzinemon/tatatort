@@ -29,6 +29,7 @@ const SeoComponent = ({ title, description, image, article }) => {
         lang: 'uk',
       }}
       >
+      <meta name="google-site-verification" content="H8TqJH3Pw7EpE1Jk6Ii5ng09fQCYLxoW2D1n3MQdRBU" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
