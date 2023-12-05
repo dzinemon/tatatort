@@ -122,6 +122,10 @@ export default function IndexPage({ data }) {
               })
             }
           </div>
+
+          <div className='text-center mt-5'>
+            <a href='/fillings' className='text-cyan-600 hover:underline'>Дивитись всі начинки</a>
+          </div>
         </div>
       </section>
 
