@@ -113,6 +113,9 @@ export default function IndexPage({ data }) {
 
       <section className="py-10">
         <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'> Начинки Тататорт</h2>
+        <div className='text-center mb-6 lg:mb-8 lg:text-2xl text-lg'>
+            <a href='/fillings' className='text-cyan-600 hover:underline'>Дивитись всі начинки</a>
+          </div>
         <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
         
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -123,9 +126,7 @@ export default function IndexPage({ data }) {
             }
           </div>
 
-          <div className='text-center mt-5'>
-            <a href='/fillings' className='text-cyan-600 hover:underline'>Дивитись всі начинки</a>
-          </div>
+         
         </div>
       </section>
 
