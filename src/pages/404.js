@@ -1,49 +1,31 @@
-import * as React from "react"
+import React from "react"
 import { Link } from "gatsby"
-
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
+import Layout from "../components/layout"
+import { Seo } from "../components/Seo"
 
 const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <Layout>
+      <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
+        <div className="flex flex-wrap items-center justify-center -mx-4">
+          <div className="w-full max-w-2xl text-center">
+            <h1 className='font-poiret lg:text-6xl text-4xl'>Сторінку не знайдено</h1>
+            <p className="mb-8 lg:mb-10 opacity-80 text-sm">На жаль, ця сторінка не існує</p>
+            <div className='space-y-5 lg:text-lg max-w-2xl mx-auto'>
+              <p>Повернутись на <Link to="/" className="text-cyan-600 hover:underline">головну сторінку</Link></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
   )
 }
 
 export default NotFoundPage
 
-export const Head = () => <title>Not found</title>
+export const Head = () => (
+  <Seo
+    title="Сторінку не знайдено - Тататорт"
+    description="На жаль, ця сторінка не існує. Повернутись на головну сторінку."
+  />
+)

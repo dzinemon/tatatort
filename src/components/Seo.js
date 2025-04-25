@@ -1,10 +1,8 @@
 import React from "react"
-import { Helmet } from "react-helmet"
-import { useLocation } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SeoComponent = ({ title, description, image, article, keywords }) => {
-  const { pathname } = useLocation()
+// This component's data will be used inside the page's Head export
+export const Seo = ({ title, description, image, article, keywords, children }) => {
   const { site } = useStaticQuery(query)
 
   const {
@@ -18,7 +16,7 @@ const SeoComponent = ({ title, description, image, article, keywords }) => {
     title: title || defaultTitle,
     description: description || defaultDescription,
     image: `${siteUrl}${image || defaultImage}`,
-    url: `${siteUrl}${pathname}`,
+    url: typeof window !== 'undefined' ? `${siteUrl}${window.location.pathname}` : `${siteUrl}`,
     keywords: keywords || "торти, тататорт, торти на замовлення, київ, cake, tatatort",
   }
 
@@ -53,13 +51,11 @@ const SeoComponent = ({ title, description, image, article, keywords }) => {
   }
 
   return (
-    <Helmet 
-      title={seo.title}
-      htmlAttributes={{
-        lang: 'uk',
-      }}
-    >
+    <>
+      <html lang="uk" />
       <meta name="google-site-verification" content="H8TqJH3Pw7EpE1Jk6Ii5ng09fQCYLxoW2D1n3MQdRBU" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
       <meta name="keywords" content={seo.keywords} />
@@ -83,17 +79,15 @@ const SeoComponent = ({ title, description, image, article, keywords }) => {
       <meta name="twitter:image" content={seo.image} />
 
       {/* Structured data */}
-      <script type="application/ld+json">
-        {JSON.stringify(schemaOrgWebPage)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(schemaOrgBusiness)}
-      </script>
-    </Helmet>
+      <script type="application/ld+json">{JSON.stringify(schemaOrgWebPage)}</script>
+      <script type="application/ld+json">{JSON.stringify(schemaOrgBusiness)}</script>
+      
+      {children}
+    </>
   )
 }
 
-export default SeoComponent
+export default Seo
 
 const query = graphql`
   query SEO {

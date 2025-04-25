@@ -1,22 +1,31 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import Layout from '../components/layout'
-import SeoComponent from '../components/SeoComponent';
+import { Seo } from '../components/Seo';
 
-const CakeCategoryCard = ( {data} ) => {
-
-  const image = data.images[0]
-
+const CategoryCard = ({ data, type }) => {
+  const image = data.images[0];
+  
   return (
-    <a href={`/${data.slug}`} className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'>
+    <a 
+      href={`/${data.slug}`} 
+      className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'
+      aria-label={`${data.title} - відкрити деталі`}
+    >
       <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200'>
-        <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={image.gatsbyImageData} alt={`${ image.title && image.title } ${image.description && image.description}`} />
+        <GatsbyImage 
+          objectFit='cover' 
+          imgClassName='object-center' 
+          className='aspect-square h-full w-full' 
+          image={image.gatsbyImageData} 
+          alt={`${image.title || ''} ${image.description || ''}`} 
+        />
       </div>
       <div className='absolute inset-0'>
         <div className='flex h-full p-3 lg:p-6 items-center justify-center'>
@@ -33,19 +42,33 @@ const CakeCategoryCard = ( {data} ) => {
     </a>
   )
 }
-const FillingCategoryCard = ( {data} ) => {
-  const image = data.images[0]
+
+// LazyFillingCard component for better performance with below-the-fold images
+const LazyFillingCard = ({ data }) => {
+  const image = data.images[0];
+  
   return (
-    <a href={`/${data.slug}`} className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'>
+    <a 
+      href={`/${data.slug}`} 
+      className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'
+      aria-label={`${data.title} - відкрити деталі`}
+    >
       <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200'>
-        <GatsbyImage objectFit='cover' imgClassName='object-center' className='aspect-square h-full w-full' image={image.gatsbyImageData} alt={`${ image.title && image.title } ${image.description && image.description}`} />
+        <GatsbyImage 
+          objectFit='cover' 
+          imgClassName='object-center' 
+          className='aspect-square h-full w-full' 
+          image={image.gatsbyImageData} 
+          alt={`${image.title || ''} ${image.description || ''}`} 
+          loading="lazy"
+        />
       </div>
       <div className='absolute inset-0'>
-        <div className='flex h-full p-6 items-center justify-center'>
+        <div className='flex h-full p-3 lg:p-6 items-center justify-center'>
           <div className='w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full'>
             <div className='relative w-full'>
-              <p className="px-4 font-bold text-2xl font-poiret">{data.title}</p>
-              <p className="px-4 text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
+              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">{data.title}</p>
+              <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
                 Детальніше
               </p>
             </div>
@@ -57,23 +80,24 @@ const FillingCategoryCard = ( {data} ) => {
 }
 
 const socialItems = [
-  { name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
-  { name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
+  { 
+    name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, 
+    url: "https://www.instagram.com/tatatort/",
+    ariaLabel: "Visit our Instagram page"
+  },
+  { 
+    name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, 
+    url: "https://www.facebook.com/Tatatort/",
+    ariaLabel: "Visit our Facebook page"
+  }
 ]
 
 export default function IndexPage({ data }) {
-
   const fillings = data.fillings.edges
   const cakes = data.cakes.edges
   
-  
-  
   return (
     <Layout>
-      <SeoComponent
-        title={`Торти на замовлення в Києві - Тататорт`}
-        description={`Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!`}
-      />
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
@@ -84,13 +108,19 @@ export default function IndexPage({ data }) {
               <p>Оригінальний дизайн, смачна начинка, позитивні емоції – це Тататорт!</p>
               <p>Замовити торт або кендібар:
                 {" "}
-              {socialItems.map((soc, idx) => <a href={soc.url} key={`social-${idx}`} className='mx-1 text-cyan-600 hover:underline'>{soc.name}</a>)}
+              {socialItems.map((soc, idx) => (
+                <a 
+                  href={soc.url} 
+                  key={`social-${idx}`} 
+                  className='mx-1 text-cyan-600 hover:underline'
+                  aria-label={soc.ariaLabel}
+                >
+                  {soc.name}
+                </a>
+              ))}
               </p>
             </div>
           </div>
-          {/* <div className="w-full lg:w-1/2 aspect-video bg-teal-500">
-
-          </div> */}
         </div>
       </div>
 
@@ -101,11 +131,9 @@ export default function IndexPage({ data }) {
         <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
         
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {
-              cakes.map((el, idx, arr) => {
-                return <CakeCategoryCard data={el.node} key={`cake-category-${idx}`} />
-              })
-            }
+            {cakes.map((el, idx) => (
+              <CategoryCard data={el.node} type="cake" key={`cake-category-${idx}`} />
+            ))}
           </div>
         </div>
         
@@ -119,11 +147,9 @@ export default function IndexPage({ data }) {
         <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
         
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {
-              fillings.map((el, idx, arr) => {
-                return <CakeCategoryCard data={el.node} key={`filling-category-${idx}`} />
-              })
-            }
+            {fillings.map((el, idx) => (
+              <LazyFillingCard data={el.node} key={`filling-category-${idx}`} />
+            ))}
           </div>
 
          
@@ -133,6 +159,13 @@ export default function IndexPage({ data }) {
     </Layout>
   )
 }
+
+export const Head = () => (
+  <Seo
+    title="Торти на замовлення в Києві - Тататорт"
+    description="Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!"
+  />
+)
 
 export const query = graphql`
   query {

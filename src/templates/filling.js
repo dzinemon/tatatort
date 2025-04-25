@@ -6,7 +6,7 @@ import Modal from '../components/Modal'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/solid'
 
 import Layout from '../components/layout'
-import SeoComponent from '../components/SeoComponent';
+import { Seo } from '../components/Seo';
 
 export default function FillingPage({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,11 +46,6 @@ export default function FillingPage({ data }) {
   
   return (
     <Layout>
-      <SeoComponent
-        title={`${data.contentfulCategory.title}`}
-        description={`${data.contentfulCategory.description} - Начинки від Тататорт`}
-      />
-    
       <div className="container py-16 lg:py-20">
         <h1 className='text-4xl lg:text-6xl font-poiret text-center '>{data.contentfulCategory.title}</h1>
       </div>
@@ -98,6 +93,13 @@ export default function FillingPage({ data }) {
     </Layout>
   )
 }
+
+export const Head = ({ data }) => (
+  <Seo
+    title={data.contentfulCategory.title}
+    description={`${data.contentfulCategory.description || data.contentfulCategory.title} - Начинки від Тататорт`}
+  />
+)
 
 export const query = graphql`
   query($slug: String!) {
