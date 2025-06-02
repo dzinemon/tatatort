@@ -38,7 +38,49 @@ module.exports = {
         "G-98YQDHYXK7"
       ]
     }
-  }, "gatsby-plugin-react-helmet", "gatsby-plugin-sitemap", {
+  }, "gatsby-plugin-react-helmet", {
+    resolve: "gatsby-plugin-sitemap",
+    options: {
+      output: "/",
+      excludes: ["/404", "/404.html", "/dev-404-page"],
+      query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+        }
+      `,
+      resolveSiteUrl: () => "https://tatatort.com.ua",
+      serialize: ({ path, site }) => {
+        let priority = 0.7;
+        let changefreq = "weekly";
+        
+        // Set higher priority for homepage
+        if (path === "/") {
+          priority = 1.0;
+          changefreq = "daily";
+        }
+        // Set higher priority for main category pages
+        else if (path.match(/^\/[^\/]+\/$/) && !path.includes("/page-data/")) {
+          priority = 0.8;
+          changefreq = "weekly";
+        }
+        
+        return {
+          url: path,
+          changefreq,
+          priority,
+        };
+      },
+    },
+  }, {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/logowhitebg.png"
