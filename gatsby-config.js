@@ -20,6 +20,8 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
+    title: `Торти на замовлення в Києві - Тататорт`,
+    description: `Оригінальні торти на замовлення у Києві. Весільні торти, дитячі торти, торти для особливих подій від Тататорт`,
     siteUrl: `https://tatatort.com.ua`,
     url: `https://tatatort.com.ua`,
     image: '/image.png'
