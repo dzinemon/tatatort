@@ -1,0 +1,9 @@
+node_modules/
+public/
+.cache/
+gatsby-*.js
+*.min.js
+package-lock.json
+yarn.lock
+.env
+.env.*
