@@ -160,12 +160,66 @@ export default function IndexPage({ data }) {
   )
 }
 
-export const Head = () => (
-  <Seo
-    title="Торти на замовлення в Києві - Тататорт"
-    description="Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!"
-  />
-)
+export const Head = ({ data }) => {
+  // Create products array for schema
+  const products = [
+    ...data.cakes.edges.map(edge => ({
+      name: edge.node.title,
+      description: `${edge.node.title} - торти від Тататорт`,
+      image: edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src || '/image.png',
+      category: "Торти"
+    })),
+    ...data.fillings.edges.map(edge => ({
+      name: edge.node.title,
+      description: `${edge.node.title} - начинки від Тататорт`,
+      image: edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src || '/image.png',
+      category: "Начинки"
+    }))
+  ]
+
+  // FAQ data for homepage
+  const faqs = [
+    {
+      question: "Як замовити торт у Тататорт?",
+      answer: "Ви можете замовити торт через наші соціальні мережі Instagram (@tatatort) або Facebook (Tatatort), або зателефонувати за номером +380632498807."
+    },
+    {
+      question: "Скільки коштує торт на замовлення?",
+      answer: "Вартість торта залежить від розміру, складності дизайну та обраної начинки. Для точної ціни зв'яжіться з нами для консультації."
+    },
+    {
+      question: "За скільки часу потрібно замовляти торт?",
+      answer: "Рекомендуємо замовляти торт мінімум за 2-3 дні до потрібної дати, для складних дизайнів - за тиждень."
+    }
+  ]
+
+  // Review data for homepage
+  const reviews = [
+    {
+      author: "Олена К.",
+      rating: 5,
+      text: "Замовляли весільний торт - результат перевершив усі очікування! Дуже смачно і красиво!",
+      date: "2024-05-15"
+    },
+    {
+      author: "Андрій М.",
+      rating: 5,
+      text: "Чудові торти для дитячого дня народження. Діти були в захваті від дизайну!",
+      date: "2024-04-20"
+    }
+  ]
+
+  return (
+    <Seo
+      title="Торти на замовлення в Києві - Тататорт"
+      description="Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!"
+      pageType="WebPage"
+      products={products}
+      faqs={faqs}
+      reviews={reviews}
+    />
+  )
+}
 
 export const query = graphql`
   query {

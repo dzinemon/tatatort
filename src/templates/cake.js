@@ -84,12 +84,49 @@ export default function CakesPage({ data }) {
   )
 }
 
-export const Head = ({ data }) => (
-  <Seo
-    title={data.contentfulCategory.title}
-    description={`${data.contentfulCategory.description || data.contentfulCategory.title} - Торти від Тататорт`}
-  />
-)
+export const Head = ({ data }) => {
+  // Create products array for schema from category images
+  const products = data.contentfulCategory.images.map((image, index) => ({
+    name: image.title || `${data.contentfulCategory.title} ${index + 1}`,
+    description: image.description || `${image.title || data.contentfulCategory.title} - торт від Тататорт`,
+    image: image.file.url,
+    category: data.contentfulCategory.title,
+    price: "договірна"
+  }))
+
+  // Create breadcrumb navigation
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "Торти", url: "/#cakes" },
+    { name: data.contentfulCategory.title, url: `/${data.contentfulCategory.slug}/` }
+  ]
+
+  // FAQ data specific to cake category
+  const faqs = [
+    {
+      question: `Скільки коштує торт ${data.contentfulCategory.title}?`,
+      answer: "Вартість торта залежить від розміру та складності дизайну. Зв'яжіться з нами для отримання точної ціни."
+    },
+    {
+      question: `Як замовити торт ${data.contentfulCategory.title}?`,
+      answer: "Ви можете замовити торт через наші соціальні мережі Instagram або Facebook, або зателефонувати за номером +380632498807."
+    }
+  ]
+
+  return (
+    <Seo
+      title={`${data.contentfulCategory.title} - Торти на замовлення від Тататорт`}
+      description={`${data.contentfulCategory.description || data.contentfulCategory.title} - оригінальні торти на замовлення у Києві від Тататорт. Унікальний дизайн та смачні начинки.`}
+      image={data.contentfulCategory.images[0]?.file?.url}
+      pageType="CollectionPage"
+      products={products}
+      breadcrumbs={breadcrumbs}
+      category={data.contentfulCategory.title}
+      faqs={faqs}
+      keywords={`${data.contentfulCategory.title}, торти на замовлення, київ, тататорт, cake, custom cakes`}
+    />
+  )
+}
 
 export const query = graphql`
   query($slug: String!) {

@@ -77,12 +77,52 @@ export default function FillingsIndexPage({ data }) {
   )
 }
 
-export const Head = () => (
-  <Seo
-    title="Начинки для тортів Тататорт - Київ"
-    description="Різноманітні оригінальні начинки для тортів на замовлення. Дизайн, смачна начинка та позитивні емоції – це Тататорт!"
-  />
-)
+export const Head = ({ data }) => {
+  // Create products array for schema from all filling categories
+  const products = data.fillings.edges.flatMap(edge => 
+    edge.node.images.map((image, index) => ({
+      name: image.title || `${edge.node.title} ${index + 1}`,
+      description: image.description || `${image.title || edge.node.title} - начинка від Тататорт`,
+      image: image.file.url,
+      category: edge.node.title,
+      price: "договірна"
+    }))
+  )
+
+  // Create breadcrumb navigation
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "Начинки", url: "/fillings/" }
+  ]
+
+  // FAQ data for fillings page
+  const faqs = [
+    {
+      question: "Які начинки доступні для тортів?",
+      answer: "Ми пропонуємо широкий вибір начинок: від класичних до оригінальних авторських. Всі начинки готуються з натуральних інгредієнтів."
+    },
+    {
+      question: "Чи можна поєднувати різні начинки в одному торті?",
+      answer: "Так, ви можете вибрати декілька начинок для свого торта. Ми допоможемо підібрати найкращі поєднання смаків."
+    },
+    {
+      question: "Чи є начинки для людей з алергіями?",
+      answer: "Ми можемо приготувати начинки без глютену, молочних продуктів або інших алергенів. Обов'язково повідомте про алергії при замовленні."
+    }
+  ]
+
+  return (
+    <Seo
+      title="Начинки для тортів - Каталог смачних начинок Тататорт"
+      description="Великий вибір оригінальних начинок для тортів на замовлення у Києві. Натуральні інгредієнти, унікальні рецепти та неперевершений смак від Тататорт."
+      pageType="CollectionPage"
+      products={products}
+      breadcrumbs={breadcrumbs}
+      faqs={faqs}
+      keywords="начинки для тортів, начинки тататорт, київ, cake fillings, торти на замовлення"
+    />
+  )
+}
 
 export const query = graphql`
   query {

@@ -23,9 +23,18 @@ const NotFoundPage = () => {
 
 export default NotFoundPage
 
-export const Head = () => (
-  <Seo
-    title="Сторінку не знайдено - Тататорт"
-    description="На жаль, ця сторінка не існує. Повернутись на головну сторінку."
-  />
-)
+export const Head = () => {
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "404 - Сторінку не знайдено", url: "/404/" }
+  ]
+
+  return (
+    <Seo
+      title="Сторінку не знайдено - Тататорт"
+      description="На жаль, ця сторінка не існує. Повернутись на головну сторінку."
+      pageType="WebPage"
+      breadcrumbs={breadcrumbs}
+    />
+  )
+}

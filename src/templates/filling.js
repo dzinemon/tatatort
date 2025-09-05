@@ -94,12 +94,49 @@ export default function FillingPage({ data }) {
   )
 }
 
-export const Head = ({ data }) => (
-  <Seo
-    title={data.contentfulCategory.title}
-    description={`${data.contentfulCategory.description || data.contentfulCategory.title} - Начинки від Тататорт`}
-  />
-)
+export const Head = ({ data }) => {
+  // Create products array for schema from category images
+  const products = data.contentfulCategory.images.map((image, index) => ({
+    name: image.title || `${data.contentfulCategory.title} ${index + 1}`,
+    description: image.description || `${image.title || data.contentfulCategory.title} - начинка від Тататорт`,
+    image: image.file.url,
+    category: data.contentfulCategory.title,
+    price: "договірна"
+  }))
+
+  // Create breadcrumb navigation
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "Начинки", url: "/fillings/" },
+    { name: data.contentfulCategory.title, url: `/${data.contentfulCategory.slug}/` }
+  ]
+
+  // FAQ data specific to filling category
+  const faqs = [
+    {
+      question: `Що входить до складу начинки ${data.contentfulCategory.title}?`,
+      answer: "Ми використовуємо тільки якісні інгредієнти для наших начинок. Точний склад можна уточнити при замовленні."
+    },
+    {
+      question: `Чи можна замовити торт тільки з начинкою ${data.contentfulCategory.title}?`,
+      answer: "Так, ви можете обрати будь-яку начинку для свого торта або скомбінувати декілька начинок."
+    }
+  ]
+
+  return (
+    <Seo
+      title={`${data.contentfulCategory.title} - Начинки для тортів від Тататорт`}
+      description={`${data.contentfulCategory.description || data.contentfulCategory.title} - смачні начинки для тортів на замовлення у Києві від Тататорт. Натуральні інгредієнти та унікальні рецепти.`}
+      image={data.contentfulCategory.images[0]?.file?.url}
+      pageType="CollectionPage"
+      products={products}
+      breadcrumbs={breadcrumbs}
+      category={data.contentfulCategory.title}
+      faqs={faqs}
+      keywords={`${data.contentfulCategory.title}, начинки для тортів, київ, тататорт, cake fillings`}
+    />
+  )
+}
 
 export const query = graphql`
   query($slug: String!) {
