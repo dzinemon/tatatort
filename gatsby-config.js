@@ -100,9 +100,21 @@ module.exports = {
     resolve: 'gatsby-plugin-purgecss',
     options: {
       tailwind: true,
-      ignore: ['/node_modules/@fontsource/', 'fontawesome/'],
+      ignore: [
+        '/node_modules/@fontsource/',
+        '/node_modules/@fortawesome/'
+      ],
       whitelist: ['is-active', 'dr-dwn'],
-      whitelistPatterns: [/^fa-/, /hamburger-react/]
+      whitelistPatterns: [
+        /^fa-/,
+        /^fas-/,
+        /^far-/,
+        /^fab-/,
+        /^fal-/,
+        /^fad-/,
+        /hamburger-react/,
+        /svg-inline--fa/
+      ]
     }
   }
 ]
