@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import '@fortawesome/fontawesome-svg-core/styles.css'  
 
 import NavbarItem from "../components/header-item"
 import useOutsideClick from "../utils/outside-click";
@@ -108,7 +107,8 @@ const Navigation = ({ children }) => {
                             size={20}
                             toggled={isMenuOpen}
                             toggle={toggleMenu}
-                            aria-label={isMenuOpen ? "Закрити меню" : "Відкрити меню"}
+                            label={isMenuOpen ? "Закрити меню" : "Відкрити меню"}
+                            hideOutline={false}
                         />
                     </div>
                     <div className="flex md:flex-row flex-wrap flex-col items-center justify-between w-full px-5">
