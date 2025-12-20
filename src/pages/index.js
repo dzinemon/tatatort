@@ -1,37 +1,40 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import React from "react";
+import { graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import '@fortawesome/fontawesome-svg-core/styles.css'
 
-import Layout from '../components/layout'
-import { Seo } from '../components/Seo';
+import Layout from "../components/layout";
+import { Seo } from "../components/Seo";
 
 const CategoryCard = ({ data, type }) => {
   const image = data.images[0];
-  
+
   return (
-    <a 
-      href={`/${data.slug}`} 
-      className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'
+    <a
+      href={`/${data.slug}`}
+      className="bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200"
       aria-label={`${data.title} - відкрити деталі`}
     >
-      <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200'>
-        <GatsbyImage 
-          objectFit='cover' 
-          imgClassName='object-center' 
-          className='aspect-square h-full w-full' 
-          image={image.gatsbyImageData} 
-          alt={`${image.title || ''} ${image.description || ''}`} 
+      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200">
+        <GatsbyImage
+          objectFit="cover"
+          imgClassName="object-center"
+          className="aspect-square h-full w-full"
+          image={image.gatsbyImageData}
+          alt={`${image.title || ""} ${image.description || ""}`}
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
-      <div className='absolute inset-0'>
-        <div className='flex h-full p-3 lg:p-6 items-center justify-center'>
-          <div className='w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full'>
-            <div className='relative w-full'>
-              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">{data.title}</p>
+      <div className="absolute inset-0">
+        <div className="flex h-full p-3 lg:p-6 items-center justify-center">
+          <div className="w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full">
+            <div className="relative w-full">
+              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">
+                {data.title}
+              </p>
               <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
                 Детальніше
               </p>
@@ -40,34 +43,36 @@ const CategoryCard = ({ data, type }) => {
         </div>
       </div>
     </a>
-  )
-}
+  );
+};
 
 // LazyFillingCard component for better performance with below-the-fold images
 const LazyFillingCard = ({ data }) => {
   const image = data.images[0];
-  
+
   return (
-    <a 
-      href={`/${data.slug}`} 
-      className='bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200'
+    <a
+      href={`/${data.slug}`}
+      className="bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200"
       aria-label={`${data.title} - відкрити деталі`}
     >
-      <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200'>
-        <GatsbyImage 
-          objectFit='cover' 
-          imgClassName='object-center' 
-          className='aspect-square h-full w-full' 
-          image={image.gatsbyImageData} 
-          alt={`${image.title || ''} ${image.description || ''}`} 
+      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200">
+        <GatsbyImage
+          objectFit="cover"
+          imgClassName="object-center"
+          className="aspect-square h-full w-full"
+          image={image.gatsbyImageData}
+          alt={`${image.title || ""} ${image.description || ""}`}
           loading="lazy"
         />
       </div>
-      <div className='absolute inset-0'>
-        <div className='flex h-full p-3 lg:p-6 items-center justify-center'>
-          <div className='w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full'>
-            <div className='relative w-full'>
-              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">{data.title}</p>
+      <div className="absolute inset-0">
+        <div className="flex h-full p-3 lg:p-6 items-center justify-center">
+          <div className="w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full">
+            <div className="relative w-full">
+              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">
+                {data.title}
+              </p>
               <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
                 Детальніше
               </p>
@@ -76,49 +81,68 @@ const LazyFillingCard = ({ data }) => {
         </div>
       </div>
     </a>
-  )
-}
+  );
+};
 
 const socialItems = [
-  { 
-    name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, 
+  {
+    name: (
+      <>
+        <FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram{" "}
+      </>
+    ),
     url: "https://www.instagram.com/tatatort/",
-    ariaLabel: "Visit our Instagram page"
+    ariaLabel: "Visit our Instagram page",
   },
-  { 
-    name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, 
+  {
+    name: (
+      <>
+        <FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook{" "}
+      </>
+    ),
     url: "https://www.facebook.com/Tatatort/",
-    ariaLabel: "Visit our Facebook page"
-  }
-]
+    ariaLabel: "Visit our Facebook page",
+  },
+];
 
 export default function IndexPage({ data }) {
-  const fillings = data.fillings.edges
-  const cakes = data.cakes.edges
-  
+  const fillings = data.fillings.edges;
+  const cakes = data.cakes.edges;
+
   return (
     <Layout>
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
-            <h1 className='font-poiret lg:text-6xl text-4xl'>Тататорт</h1>
-            <p className="mb-8 lg:mb-10 opacity-80 text-sm">Оригінальні торти на замовлення у Києві</p>
-            <div className='space-y-5 lg:text-lg max-w-2xl mx-auto'>
-              <p>Друзі, цей сайт присвячений моєму солодкому хобі. Тут кожен зможе знайти торти для себе.</p>
-              <p>Оригінальний дизайн, смачна начинка, позитивні емоції – це Тататорт!</p>
-              <p>Замовити торт або кендібар:
-                {" "}
+            <h1 className="font-poiret lg:text-7xl text-4xl">Тататорт</h1>
+            <p className="mb-5 opacity-80 text-sm">
+              Оригінальні торти на замовлення у Києві
+            </p>
+            <div className="space-y-5 lg:text-lg max-w-2xl mx-auto">
+              <p>
+                Професійне виготовлення тортів на замовлення в Києві. Поєднання вишуканого смаку та сучасного дизайну. Ексклюзивний декор, натуральні інгредієнти та ваші найяскравіші емоції – це Тататорт!
+              </p>
+              <p>
+                Замовити торт або кендібар:
+                <a
+                  href="tel:+380632498807"
+                  className="mx-1 text-cyan-600 hover:underline"
+                  aria-label="Call us at +380 63 249 88 07"
+                >
+                  +38 063 249 88 07
+                </a>
+              </p>{" "}
+              <p>Наші соціальні мережі:</p>
               {socialItems.map((soc, idx) => (
-                <a 
-                  href={soc.url} 
-                  key={`social-${idx}`} 
-                  className='mx-1 text-cyan-600 hover:underline'
+                <a
+                  href={soc.url}
+                  key={`social-${idx}`}
+                  className="mx-1 text-cyan-600 hover:underline"
                   aria-label={soc.ariaLabel}
                 >
                   {soc.name}
                 </a>
               ))}
-              </p>
             </div>
           </div>
         </div>
@@ -127,71 +151,83 @@ export default function IndexPage({ data }) {
       <section className="py-10 relative">
         <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-rose-200 opacity-50 blur-2xl rounded-full"></div>
         <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-teak-200 opacity-50 blur-2xl rounded-full bottom-0 right-0"></div>
-        <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'>Торти Тататорт</h2>
+        <h2 className="text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8">
+          Торти Тататорт
+        </h2>
         <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
-        
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {cakes.map((el, idx) => (
-              <CategoryCard data={el.node} type="cake" key={`cake-category-${idx}`} />
+              <CategoryCard
+                data={el.node}
+                type="cake"
+                key={`cake-category-${idx}`}
+              />
             ))}
           </div>
         </div>
-        
       </section>
 
       <section className="py-10">
-        <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'> Начинки Тататорт</h2>
-        <div className='text-center mb-6 lg:mb-8 lg:text-2xl text-lg'>
-            <a href='/fillings/' className='text-cyan-600 hover:underline'>Дивитись всі начинки</a>
-          </div>
+        <h2 className="text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8">
+          {" "}
+          Начинки Тататорт
+        </h2>
+        <div className="text-center mb-6 lg:mb-8 lg:text-2xl text-lg">
+          <a href="/fillings/" className="text-cyan-600 hover:underline">
+            Дивитись всі начинки
+          </a>
+        </div>
         <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
-        
           <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {fillings.map((el, idx) => (
               <LazyFillingCard data={el.node} key={`filling-category-${idx}`} />
             ))}
           </div>
-
-         
         </div>
       </section>
-
     </Layout>
-  )
+  );
 }
 
 export const Head = ({ data }) => {
   // Create products array for schema
   const products = [
-    ...data.cakes.edges.map(edge => ({
+    ...data.cakes.edges.map((edge) => ({
       name: edge.node.title,
       description: `${edge.node.title} - торти від Тататорт`,
-      image: edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src || '/image.png',
-      category: "Торти"
+      image:
+        edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src ||
+        "/image.png",
+      category: "Торти",
     })),
-    ...data.fillings.edges.map(edge => ({
+    ...data.fillings.edges.map((edge) => ({
       name: edge.node.title,
       description: `${edge.node.title} - начинки від Тататорт`,
-      image: edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src || '/image.png',
-      category: "Начинки"
-    }))
-  ]
+      image:
+        edge.node.images[0]?.gatsbyImageData?.images?.fallback?.src ||
+        "/image.png",
+      category: "Начинки",
+    })),
+  ];
 
   // FAQ data for homepage
   const faqs = [
     {
       question: "Як замовити торт у Тататорт?",
-      answer: "Ви можете замовити торт через наші соціальні мережі Instagram (@tatatort) або Facebook (Tatatort), або зателефонувати за номером +380632498807."
+      answer:
+        "Ви можете замовити торт через наші соціальні мережі Instagram (@tatatort) або Facebook (Tatatort), або зателефонувати за номером +380632498807.",
     },
     {
       question: "Скільки коштує торт на замовлення?",
-      answer: "Вартість торта залежить від розміру, складності дизайну та обраної начинки. Для точної ціни зв'яжіться з нами для консультації."
+      answer:
+        "Вартість торта залежить від розміру, складності дизайну та обраної начинки. Для точної ціни зв'яжіться з нами для консультації.",
     },
     {
       question: "За скільки часу потрібно замовляти торт?",
-      answer: "Рекомендуємо замовляти торт мінімум за 2-3 дні до потрібної дати, для складних дизайнів - за тиждень."
-    }
-  ]
+      answer:
+        "Рекомендуємо замовляти торт мінімум за 2-3 дні до потрібної дати, для складних дизайнів - за тиждень.",
+    },
+  ];
 
   // Review data for homepage
   const reviews = [
@@ -199,15 +235,15 @@ export const Head = ({ data }) => {
       author: "Олена К.",
       rating: 5,
       text: "Замовляли весільний торт - результат перевершив усі очікування! Дуже смачно і красиво!",
-      date: "2024-05-15"
+      date: "2024-05-15",
     },
     {
       author: "Андрій М.",
       rating: 5,
       text: "Чудові торти для дитячого дня народження. Діти були в захваті від дизайну!",
-      date: "2024-04-20"
-    }
-  ]
+      date: "2024-04-20",
+    },
+  ];
 
   return (
     <Seo
@@ -218,12 +254,14 @@ export const Head = ({ data }) => {
       faqs={faqs}
       reviews={reviews}
     />
-  )
-}
+  );
+};
 
 export const query = graphql`
   query {
-    cakes: allContentfulCategory(filter: {type: {eq: "cake"}, node_locale: {eq: "uk"}}) {
+    cakes: allContentfulCategory(
+      filter: { type: { eq: "cake" }, node_locale: { eq: "uk" } }
+    ) {
       edges {
         node {
           slug
@@ -232,14 +270,22 @@ export const query = graphql`
           type
           title
           images {
-            gatsbyImageData
+            gatsbyImageData(
+              width: 400
+              height: 400
+              quality: 85
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
             title
             description
           }
         }
       }
     }
-    fillings: allContentfulCategory(filter: {type: {eq: "filling"}, node_locale: {eq: "uk"}}) {
+    fillings: allContentfulCategory(
+      filter: { type: { eq: "filling" }, node_locale: { eq: "uk" } }
+    ) {
       edges {
         node {
           slug
@@ -248,7 +294,13 @@ export const query = graphql`
           type
           title
           images {
-            gatsbyImageData(width: 282, height: 282)
+            gatsbyImageData(
+              width: 282
+              height: 282
+              quality: 85
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
             title
             description
           }
@@ -256,4 +308,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

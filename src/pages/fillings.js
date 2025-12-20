@@ -4,7 +4,6 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import Layout from '../components/layout'
 import { Seo } from '../components/Seo';
@@ -54,7 +53,8 @@ export default function FillingsIndexPage({ data }) {
                               imgClassName='object-center' 
                               className='aspect-square h-full w-full transition-transform duration-300 group-hover:scale-105' 
                               image={img.gatsbyImageData} 
-                              alt={`${ img.title && img.title } ${img.description && img.description}`} 
+                              alt={`${ img.title && img.title } ${img.description && img.description}`}
+                              loading="lazy"
                             />
                           </div>
                           <div className='space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-4 rounded-b-lg'>
@@ -136,7 +136,13 @@ export const query = graphql`
           title
           images {
             id
-            gatsbyImageData(width: 282, height: 282)
+            gatsbyImageData(
+              width: 282, 
+              height: 282,
+              quality: 85,
+              placeholder: BLURRED,
+              formats: [AUTO, WEBP, AVIF]
+            )
             title
             description
             file {
