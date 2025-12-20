@@ -95,6 +95,15 @@ module.exports = {
     },
     __key: "images"
   },
-  'gatsby-plugin-postcss'
+  'gatsby-plugin-postcss',
+  {
+    resolve: 'gatsby-plugin-purgecss',
+    options: {
+      tailwind: true,
+      ignore: ['/node_modules/@fontsource/', 'fontawesome/'],
+      whitelist: ['is-active', 'dr-dwn'],
+      whitelistPatterns: [/^fa-/, /hamburger-react/]
+    }
+  }
 ]
 };
