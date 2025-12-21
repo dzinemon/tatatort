@@ -273,7 +273,7 @@ export const query = graphql`
             gatsbyImageData(
               width: 400
               height: 400
-              quality: 85
+              quality: 70
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
             )
@@ -297,7 +297,7 @@ export const query = graphql`
             gatsbyImageData(
               width: 282
               height: 282
-              quality: 85
+              quality: 70
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
             )
