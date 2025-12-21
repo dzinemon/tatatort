@@ -102,9 +102,10 @@ module.exports = {
       tailwind: true,
       ignore: [
         '/node_modules/@fontsource/',
-        '/node_modules/@fortawesome/'
+        '/node_modules/@fortawesome/',
+        '/src/styles/global.css'
       ],
-      whitelist: ['is-active', 'dr-dwn'],
+      whitelist: ['is-active', 'dr-dwn', 'svg-inline--fa'],
       whitelistPatterns: [
         /^fa-/,
         /^fas-/,
