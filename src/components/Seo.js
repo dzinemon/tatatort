@@ -388,8 +388,8 @@ export const Seo = ({
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
-      <meta name="twitter:site" content="@tatatort" />
-      <meta name="twitter:creator" content="@tatatort" />
+      {/* <meta name="twitter:site" content="@tatatort" />
+      <meta name="twitter:creator" content="@tatatort" /> */}
 
       {/* Additional SEO meta tags */}
       <meta name="robots" content="index, follow" />

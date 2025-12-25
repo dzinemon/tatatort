@@ -3,10 +3,12 @@ import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faTelegram } from "@fortawesome/free-brands-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "../components/layout";
 import { Seo } from "../components/Seo";
+import FAQ from "../components/FAQ";
 
 const CategoryCard = ({ data, type }) => {
   const image = data.images[0];
@@ -109,11 +111,36 @@ export default function IndexPage({ data }) {
   const fillings = data.fillings.edges;
   const cakes = data.cakes.edges;
 
+  // FAQ data
+  const faqs = [
+        {
+      question: "За скільки часу потрібно замовляти торт?",
+      answer:
+        "Рекомендуємо замовляти торт мінімум за 2-3 дні до потрібної дати, для складних дизайнів - за тиждень.",
+    },
+    {
+      question: "Скільки коштує торт на замовлення?",
+      answer:
+        "Вартість торта залежить від розміру, складності дизайну та обраної начинки. Для точної ціни зв'яжіться з нами для консультації.",
+    },
+
+    {
+      question: "Як здійснюється доставка тортів?",
+      answer:
+        "Ми пропонуємо доставку тортів по Києву та області через служби таксі. Також можливий самовивіз з нашої майстерні.",
+    },
+    {
+      question: "Як розрахувати вагу торта?",
+      answer:
+        "Зазвичай розрахунок ваги торта здійснюється виходячи з кількості порцій. Рекомендуємо приблизно 125-150 грамів на порцію. В деяких випадках вага може бути більшою в залежності від дизайну та начинки.",
+    }
+  ];
+
   return (
     <Layout>
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
-          <div className="w-full max-w-2xl text-center">
+          <div className="w-full max-w-2xl text-center px-4">
             <h1 className="font-poiret lg:text-7xl text-4xl">Тататорт</h1>
             <p className="mb-5 opacity-80 text-sm">
               Оригінальні торти на замовлення у Києві
@@ -124,13 +151,26 @@ export default function IndexPage({ data }) {
               </p>
               <p>
                 Замовити торт або кендібар:
-                <a
-                  href="tel:+380632498807"
-                  className="mx-1 text-cyan-600 hover:underline"
-                  aria-label="Call us at +380 63 249 88 07"
-                >
-                  +38 063 249 88 07
-                </a>
+                <div className="flex flex-row gap-2 md:gap-4 justify-center items-center mt-4">
+                  <a
+                    href="tel:+380632498807"
+                    className="inline-flex items-center px-3 py-2 lg:px-6 lg:py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:text-lg transition-colors gap-2"
+                    aria-label="Зателефонувати нам"
+                  >
+                    <FontAwesomeIcon icon={faPhone} />
+                    Зателефонувати
+                  </a>
+                  <a
+                    href="https://t.me/TataUtekhina"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-3 py-2 lg:px-6 lg:py-3 border border-transparent text-base font-medium rounded-md text-cyan-700 bg-cyan-100 hover:bg-cyan-200 md:text-lg transition-colors gap-2"
+                    aria-label="Написати в Telegram"
+                  >
+                    <FontAwesomeIcon icon={faTelegram} />
+                    Написати в Telegram
+                  </a>
+                </div>
               </p>{" "}
               <p>Наші соціальні мережі:</p>
               {socialItems.map((soc, idx) => (
@@ -185,6 +225,8 @@ export default function IndexPage({ data }) {
           </div>
         </div>
       </section>
+
+      <FAQ faqs={faqs} />
     </Layout>
   );
 }
@@ -210,7 +252,7 @@ export const Head = ({ data }) => {
     })),
   ];
 
-  // FAQ data for homepage
+  // FAQ data for schema
   const faqs = [
     {
       question: "Як замовити торт у Тататорт?",
@@ -229,30 +271,14 @@ export const Head = ({ data }) => {
     },
   ];
 
-  // Review data for homepage
-  const reviews = [
-    {
-      author: "Олена К.",
-      rating: 5,
-      text: "Замовляли весільний торт - результат перевершив усі очікування! Дуже смачно і красиво!",
-      date: "2024-05-15",
-    },
-    {
-      author: "Андрій М.",
-      rating: 5,
-      text: "Чудові торти для дитячого дня народження. Діти були в захваті від дизайну!",
-      date: "2024-04-20",
-    },
-  ];
-
   return (
     <Seo
       title="Торти на замовлення в Києві - Тататорт"
-      description="Тут ви зможете замовити оригінальні торти для своїх близьких. Дизайн, смачна начинка та позитивні емоції – це Тататорт!"
+      description="Тут ви зможете замовити оригінальні торти для своїх близьких. Авторський дизайн, вишукані начинки та позитивні емоції – це Тататорт!"
       pageType="WebPage"
       products={products}
       faqs={faqs}
-      reviews={reviews}
+      // reviews={reviews}
     />
   );
 };

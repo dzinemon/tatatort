@@ -34,6 +34,11 @@ const navbarItems = [
         ]
     },
     { 
+        name: "Калькулятор",
+        url: "/calculator/",
+        ariaLabel: "Розрахувати вартість торту"
+    },
+    { 
       name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, 
       url: "https://www.instagram.com/tatatort/",
       ariaLabel: "Відвідати наш Instagram"
