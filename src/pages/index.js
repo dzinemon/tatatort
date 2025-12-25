@@ -154,20 +154,20 @@ export default function IndexPage({ data }) {
                 <div className="flex flex-row gap-2 md:gap-4 justify-center items-center mt-4">
                   <a
                     href="tel:+380632498807"
-                    className="inline-flex items-center px-3 py-2 lg:px-6 lg:py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:text-lg transition-colors gap-2"
+                    className="inline-flex items-center px-2 py-1.5 md:px-3 md:py-2 lg:px-6 lg:py-3 border border-transparent text-sm md:text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:text-lg transition-colors gap-2"
                     aria-label="Зателефонувати нам"
                   >
-                    <FontAwesomeIcon icon={faPhone} />
+                    <FontAwesomeIcon icon={faPhone} size="lg" />
                     Зателефонувати
                   </a>
                   <a
                     href="https://t.me/TataUtekhina"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-3 py-2 lg:px-6 lg:py-3 border border-transparent text-base font-medium rounded-md text-cyan-700 bg-cyan-100 hover:bg-cyan-200 md:text-lg transition-colors gap-2"
+                    className="inline-flex items-center px-2 py-1.5 md:px-3 md:py-2 lg:px-6 lg:py-3 border border-transparent text-sm md:text-base font-medium rounded-md text-cyan-700 bg-cyan-100 hover:bg-cyan-200 md:text-lg transition-colors gap-2"
                     aria-label="Написати в Telegram"
                   >
-                    <FontAwesomeIcon icon={faTelegram} />
+                    <FontAwesomeIcon icon={faTelegram} size="lg" />
                     Написати в Telegram
                   </a>
                 </div>
