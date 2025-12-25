@@ -42,12 +42,12 @@ const Calculator = ({ fillingGroups }) => {
     const decorName = DECOR_LEVELS.find(d => d.id === decor)?.name;
     const fillingName = filling ? filling.name : 'Не обрано';
     
-    const text = `Вітаю! Хочу замовити торт:%0A` +
-                 `- Вага: ${weight} кг%0A` +
-                 `- Начинка: ${fillingName}%0A` +
-                 `- Декор: ${decorName}%0A` +
-                 `- Доставка: ${delivery ? 'Так' : 'Ні'}%0A` +
-                 `Орієнтовна вартість: ${totalPrice} грн`;
+    const text = `Вітаю! 👋 Хочу замовити торт:%0A` +
+                 `⚖️ Вага: ${weight} кг%0A` +
+                 `🍰 Начинка: ${fillingName}%0A` +
+                 `✨ Декор: ${decorName}%0A` +
+                 `🚚 Доставка: ${delivery ? 'Так' : 'Ні'}%0A` +
+                 `💰 Орієнтовна вартість: ${totalPrice} грн`;
                  
     return `https://t.me/TataUtekhina?text=${text}`; 
   };
