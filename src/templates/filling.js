@@ -108,7 +108,7 @@ export const Head = ({ data }) => {
     description: image.description || `${image.title || data.contentfulCategory.title} - начинка від Тататорт`,
     image: image.file.url,
     category: data.contentfulCategory.title,
-    price: "договірна"
+    price: "1200"
   }))
 
   // Create breadcrumb navigation

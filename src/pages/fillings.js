@@ -84,7 +84,7 @@ export const Head = ({ data }) => {
       description: image.description || `${image.title || edge.node.title} - начинка від Тататорт`,
       image: image.file.url,
       category: edge.node.title,
-      price: "договірна"
+      price: "1200"
     }))
   )
 
