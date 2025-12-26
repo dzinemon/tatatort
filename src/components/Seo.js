@@ -99,7 +99,7 @@ export const Seo = ({
     offers: {
       "@type": "Offer",
       priceCurrency: "UAH",
-      price: price || product.price || "договірна",
+      price: price || product.price || "1200",
       availability: `https://schema.org/${availability}`,
       seller: {
         "@type": "Organization",

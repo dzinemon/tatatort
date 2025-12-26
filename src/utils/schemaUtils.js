@@ -40,7 +40,7 @@ export const generateCakeProductSchema = (categoryData, siteUrl) => {
   baseSchema.offers = {
     "@type": "Offer",
     priceCurrency: "UAH",
-    price: "договірна",
+    price: "1200",
     availability: "https://schema.org/InStock",
     seller: {
       "@type": "Organization",
