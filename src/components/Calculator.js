@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useOutsideClick from '../utils/outside-click';
 import { ChevronDownIcon, CakeIcon } from '@heroicons/react/24/solid';
+import Button from './ui/Button';
 
 const BASE_PRICE = 1200; // UAH per kg
 const MIN_WEIGHT = 2.5; // kg
@@ -53,13 +53,13 @@ const Calculator = ({ fillingGroups }) => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-cyan-100 max-w-2xl mx-auto">
-      <h2 className="text-3xl font-poiret text-center mb-6 text-cyan-900">Калькулятор вартості торту</h2>
+    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 lg:p-8 shadow-lg border border-primary-100 max-w-2xl mx-auto">
+      <h2 className="text-3xl font-poiret text-center mb-8 text-neutral-900">Калькулятор вартості торту</h2>
       
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Weight */}
         <div>
-          <label htmlFor="weight" className="block text-gray-700 font-bold mb-2">
+          <label htmlFor="weight" className="block text-neutral-700 font-bold mb-3">
             Вага (кг) - Мінімум {MIN_WEIGHT} кг
           </label>
           <div className="flex items-center gap-4">
@@ -71,7 +71,7 @@ const Calculator = ({ fillingGroups }) => {
               step="0.5"
               value={weight}
               onChange={(e) => setWeight(parseFloat(e.target.value))}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+              className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-500"
             />
             <input
               type="number"
@@ -81,43 +81,43 @@ const Calculator = ({ fillingGroups }) => {
               step="0.5"
               value={weight}
               onChange={handleWeightChange}
-              className="w-24 p-2 border border-gray-300 rounded-lg text-center"
+              className="w-24 p-2 border border-neutral-300 rounded-lg text-center focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
             />
           </div>
         </div>
 
         {/* Custom Flavor Dropdown */}
         <div className="relative" ref={dropdownRef}>
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-neutral-700 font-bold mb-3">
             Начинка
           </label>
           <button
              type="button"
              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-             className="w-full p-3 border border-gray-300 rounded-lg bg-white flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-cyan-500"
+             className="w-full p-3 border border-neutral-300 rounded-lg bg-white flex items-center justify-between text-left focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors"
           >
             {filling ? (
               <div className="flex items-center gap-3">
-                 <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                 <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-neutral-100 flex items-center justify-center">
                    {filling.image && getImage(filling.image) ? (
                      <GatsbyImage image={getImage(filling.image)} alt={filling.name} className="w-full h-full object-cover" />
                    ) : (
-                     <CakeIcon className="w-5 h-5 text-gray-400" />
+                     <CakeIcon className="w-5 h-5 text-neutral-400" />
                    )}
                  </div>
-                 <span>{filling.name}</span>
+                 <span className="text-neutral-800 ">{filling.name}</span>
               </div>
             ) : (
-              <span className="text-gray-500">Оберіть начинку</span>
+              <span className="text-neutral-500">Оберіть начинку</span>
             )}
-            <ChevronDownIcon className={`w-5 h-5 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDownIcon className={`w-5 h-5 text-neutral-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute z-50 w-full mt-2 bg-white rounded-lg shadow-xl border border-gray-100 max-h-96 overflow-y-auto">
+            <div className="absolute z-50 w-full mt-2 bg-white rounded-lg shadow-xl border border-neutral-100 max-h-96 overflow-y-auto">
               {fillingGroups && fillingGroups.map((group, idx) => (
                 <div key={idx}>
-                  <div className="px-4 py-2 bg-gray-50 font-bold text-sm text-gray-500 font-poiret uppercase tracking-wider sticky top-0 z-10">
+                  <div className="px-4 py-2 bg-neutral-50 font-bold text-xs text-neutral-500 font-poiret uppercase tracking-wider sticky top-0 z-10 border-b border-neutral-100">
                     {group.groupTitle}
                   </div>
                   {group.items && group.items.map((item, itemIdx) => (
@@ -128,22 +128,22 @@ const Calculator = ({ fillingGroups }) => {
                         setFilling(item);
                         setIsDropdownOpen(false);
                       }}
-                      className="w-full px-4 py-2 hover:bg-cyan-50 flex items-center gap-3 text-left transition-colors"
+                      className="w-full px-4 py-3 hover:bg-primary-50 flex items-center gap-3 text-left transition-colors border-b border-neutral-50 last:border-0"
                     >
-                      <div className="w-10 h-10 rounded-md overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-md overflow-hidden bg-neutral-100 flex-shrink-0 border border-neutral-200 flex items-center justify-center">
                          {item.image && getImage(item.image) ? (
                            <GatsbyImage image={getImage(item.image)} alt={item.name} className="w-full h-full object-cover" />
                          ) : (
-                           <CakeIcon className="w-6 h-6 text-gray-400" />
+                           <CakeIcon className="w-6 h-6 text-neutral-400" />
                          )}
                       </div>
-                      <span className="text-gray-700">{item.name}</span>
+                      <span className="text-neutral-700 font-medium">{item.name}</span>
                     </button>
                   ))}
                 </div>
               ))}
               {(!fillingGroups || fillingGroups.length === 0) && (
-                <div className="p-4 text-center text-gray-500">Начинок не знайдено</div>
+                <div className="p-4 text-center text-neutral-500">Начинок не знайдено</div>
               )}
             </div>
           )}
@@ -151,12 +151,14 @@ const Calculator = ({ fillingGroups }) => {
 
         {/* Decor */}
         <div>
-          <span className="block text-gray-700 font-bold mb-2">Рівень декору</span>
+          <span className="block text-neutral-700 font-bold mb-3">Рівень декору</span>
           <div className="grid md:grid-cols-2 gap-4">
             {DECOR_LEVELS.map((level) => (
               <label key={level.id} className={`
-                cursor-pointer border-2 rounded-lg p-4 transition-all
-                ${decor === level.id ? 'border-cyan-500 bg-cyan-50' : 'border-gray-200 hover:border-cyan-300'}
+                cursor-pointer border-2 rounded-xl p-4 transition-all duration-200 relative
+                ${decor === level.id 
+                  ? 'border-primary-500 bg-primary-50/50 shadow-sm' 
+                  : 'border-neutral-200 hover:border-primary-300 hover:bg-white'}
               `}>
                 <input
                   type="radio"
@@ -166,9 +168,14 @@ const Calculator = ({ fillingGroups }) => {
                   onChange={(e) => setDecor(e.target.value)}
                   className="sr-only"
                 />
-                <div className="font-bold text-gray-800">{level.name}</div>
-                <div className="text-xs text-gray-500 mt-1">{level.description}</div>
-                <div className="text-sm font-semibold text-cyan-700 mt-2">
+                
+                {decor === level.id && (
+                  <div className="absolute top-3 right-3 w-3 h-3 bg-primary-500 rounded-full"></div>
+                )}
+                
+                <div className="font-bold text-neutral-800">{level.name}</div>
+                <div className="text-xs text-neutral-500 mt-1 leading-relaxed">{level.description}</div>
+                <div className="text-sm font-semibold text-primary-700 mt-2">
                   {level.price === 0 ? 'Включено' : `+${level.price} грн`}
                 </div>
               </label>
@@ -177,39 +184,41 @@ const Calculator = ({ fillingGroups }) => {
         </div>
 
         {/* Delivery */}
-        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg border border-neutral-100">
           <input
             type="checkbox"
             id="delivery"
             checked={delivery}
             onChange={(e) => setDelivery(e.target.checked)}
-            className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500"
+            className="w-5 h-5 text-primary-600 rounded focus:ring-primary-500 border-neutral-300"
           />
-          <label htmlFor="delivery" className="text-gray-700">
+          <label htmlFor="delivery" className="text-neutral-700 font-medium cursor-pointer select-none">
             Потрібна доставка
           </label>
         </div>
 
         {/* Total & Action */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-8 pt-6 border-t border-neutral-200">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <p className="text-sm text-gray-500">Орієнтовна вартість:</p>
-              <p className="text-4xl font-poiret font-bold text-cyan-900">
+              <p className="text-sm text-neutral-500 mb-1">Орієнтовна вартість:</p>
+              <p className="text-4xl font-poiret font-bold text-neutral-900">
                 {totalPrice} - {totalPrice + 300} грн
               </p>
             </div>
             
-            <a 
+            <Button
               href={getOrderLink()} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              variant="primary"
+              size="lg"
+              className="w-full md:w-auto shadow-lg hover:shadow-primary-500/30 transform hover:-translate-y-0.5"
             >
-              Замовити з цими параметрами (Telegram)
-            </a>
+              Замовити (Telegram)
+            </Button>
           </div>
-          <p className="text-xs text-center text-gray-400 mt-4">
+          <p className="text-xs text-center text-neutral-400 mt-4">
             * Остаточна ціна може змінюватись в залежності від конкретних побажань до оформлення.
           </p>
         </div>

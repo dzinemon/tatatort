@@ -19,10 +19,6 @@
   "dependencies": {
     "@fontsource/poiret-one": "^5.0.3",
     "@fontsource/roboto": "^5.0.3",
-    "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-brands-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "gatsby": "^5.11.0",
     "gatsby-plugin-google-gtag": "^5.11.0",
@@ -37,7 +33,8 @@
     "hamburger-react": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",

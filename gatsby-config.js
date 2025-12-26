@@ -102,19 +102,11 @@ module.exports = {
       tailwind: true,
       ignore: [
         '/node_modules/@fontsource/',
-        '/node_modules/@fortawesome/',
         '/src/styles/global.css'
       ],
-      whitelist: ['is-active', 'dr-dwn', 'svg-inline--fa'],
+      whitelist: ['is-active', 'dr-dwn'],
       whitelistPatterns: [
-        /^fa-/,
-        /^fas-/,
-        /^far-/,
-        /^fab-/,
-        /^fal-/,
-        /^fad-/,
-        /hamburger-react/,
-        /svg-inline--fa/
+        /hamburger-react/
       ]
     }
   }

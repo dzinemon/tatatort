@@ -1,11 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import NavbarItem from "../components/header-item"
 import useOutsideClick from "../utils/outside-click";
 import Logo from "./logo";
+import SocialLinks from "./SocialLinks";
 
 const navbarItems = [
     {
@@ -37,16 +36,6 @@ const navbarItems = [
         name: "Калькулятор",
         url: "/calculator/",
         ariaLabel: "Розрахувати вартість торту"
-    },
-    { 
-      name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, 
-      url: "https://www.instagram.com/tatatort/",
-      ariaLabel: "Відвідати наш Instagram"
-    },
-    { 
-      name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, 
-      url: "https://www.facebook.com/Tatatort/",
-      ariaLabel: "Відвідати наш Facebook"
     },
   ]
 
@@ -136,6 +125,11 @@ const Navigation = ({ children }) => {
                                             setActiveItem={setActiveItem} 
                                         />
                                     )}
+                                    <li className="block lg:inline-block w-full lg:w-auto text-center border-b lg:border-none border-rose">
+                                      <div className="px-6 lg:px-4 py-4 lg:py-7 flex justify-center h-full items-center">
+                                        <SocialLinks variant="header" className="!gap-4" />
+                                      </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

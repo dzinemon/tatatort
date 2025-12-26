@@ -2,110 +2,17 @@ import React from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faTelegram } from "@fortawesome/free-brands-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FaTelegram, FaPhone } from "react-icons/fa6";
 
 import Layout from "../components/layout";
 import { Seo } from "../components/Seo";
 import FAQ from "../components/FAQ";
-
-const CategoryCard = ({ data, type }) => {
-  const image = data.images[0];
-
-  return (
-    <a
-      href={`/${data.slug}`}
-      className="bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200"
-      aria-label={`${data.title} - відкрити деталі`}
-    >
-      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200">
-        <GatsbyImage
-          objectFit="cover"
-          imgClassName="object-center"
-          className="aspect-square h-full w-full"
-          image={image.gatsbyImageData}
-          alt={`${image.title || ""} ${image.description || ""}`}
-          loading="eager"
-          fetchPriority="high"
-        />
-      </div>
-      <div className="absolute inset-0">
-        <div className="flex h-full p-3 lg:p-6 items-center justify-center">
-          <div className="w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full">
-            <div className="relative w-full">
-              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">
-                {data.title}
-              </p>
-              <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
-                Детальніше
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-};
-
-// LazyFillingCard component for better performance with below-the-fold images
-const LazyFillingCard = ({ data }) => {
-  const image = data.images[0];
-
-  return (
-    <a
-      href={`/${data.slug}`}
-      className="bg-white group shadow-lg rounded-lg relative block hover:shadow-xl duration-200"
-      aria-label={`${data.title} - відкрити деталі`}
-    >
-      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square rounded-lg overflow-hidden opacity-80 group-hover:opacity-100 duration-200">
-        <GatsbyImage
-          objectFit="cover"
-          imgClassName="object-center"
-          className="aspect-square h-full w-full"
-          image={image.gatsbyImageData}
-          alt={`${image.title || ""} ${image.description || ""}`}
-          loading="lazy"
-        />
-      </div>
-      <div className="absolute inset-0">
-        <div className="flex h-full p-3 lg:p-6 items-center justify-center">
-          <div className="w-auto aspect-square rounded-md bg-white/80 backdrop-blur-sm text-center flex flex-col justify-center items-center h-full">
-            <div className="relative w-full">
-              <p className="px-4 font-bold text-lg lg:text-2xl font-poiret">
-                {data.title}
-              </p>
-              <p className="px-4 text-xs lg:text-sm font-light absolute text-center w-full opacity-0 group-hover:opacity-100 duration-500">
-                Детальніше
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-};
-
-const socialItems = [
-  {
-    name: (
-      <>
-        <FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram{" "}
-      </>
-    ),
-    url: "https://www.instagram.com/tatatort/",
-    ariaLabel: "Visit our Instagram page",
-  },
-  {
-    name: (
-      <>
-        <FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook{" "}
-      </>
-    ),
-    url: "https://www.facebook.com/Tatatort/",
-    ariaLabel: "Visit our Facebook page",
-  },
-];
+import Button from "../components/ui/Button";
+import Card from "../components/ui/Card";
+import Section from "../components/ui/Section";
+import SocialLinks from "../components/SocialLinks";
+import CategoryCard from "../components/ui/CategoryCard";
+import SectionHeading from "../components/ui/SectionHeading";
 
 export default function IndexPage({ data }) {
   const fillings = data.fillings.edges;
@@ -141,90 +48,98 @@ export default function IndexPage({ data }) {
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center px-4">
-            <h1 className="font-poiret lg:text-7xl text-4xl">Тататорт</h1>
-            <p className="mb-5 opacity-80 text-sm">
+            <h1 className="font-poiret lg:text-7xl text-5xl mb-4 text-neutral-900">Тататорт</h1>
+            <p className="mb-8 opacity-80 text-lg text-neutral-600 font-light tracking-wide uppercase">
               Оригінальні торти на замовлення у Києві
             </p>
-            <div className="space-y-5 lg:text-lg max-w-2xl mx-auto">
+            <div className="space-y-8 lg:text-lg max-w-2xl mx-auto text-neutral-700 leading-relaxed">
               <p>
                 Професійне виготовлення тортів на замовлення в Києві. Поєднання вишуканого смаку та сучасного дизайну. Ексклюзивний декор, натуральні інгредієнти та ваші найяскравіші емоції – це Тататорт!
               </p>
-              <p>
-                Замовити торт або кендібар:
-                <div className="flex flex-row gap-2 md:gap-4 justify-center items-center mt-4">
-                  <a
+              
+              <div className="flex flex-col items-center gap-6 mt-8">
+                <span className="font-medium text-neutral-900">Замовити торт або кендібар:</span>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
+                  <Button
                     href="tel:+380632498807"
-                    className="inline-flex items-center px-2 py-1.5 md:px-3 md:py-2 lg:px-6 lg:py-3 border border-transparent text-sm md:text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:text-lg transition-colors gap-2"
+                    variant="primary"
+                    size="lg"
                     aria-label="Зателефонувати нам"
+                    className="w-full sm:w-auto"
                   >
-                    <FontAwesomeIcon icon={faPhone} size="lg" />
+                    <FaPhone />
                     Зателефонувати
-                  </a>
-                  <a
+                  </Button>
+                  
+                  <Button
                     href="https://t.me/TataUtekhina"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-2 py-1.5 md:px-3 md:py-2 lg:px-6 lg:py-3 border border-transparent text-sm md:text-base font-medium rounded-md text-cyan-700 bg-cyan-100 hover:bg-cyan-200 md:text-lg transition-colors gap-2"
+                    variant="secondary"
+                    size="lg"
                     aria-label="Написати в Telegram"
+                    className="w-full sm:w-auto"
                   >
-                    <FontAwesomeIcon icon={faTelegram} size="lg" />
+                    <FaTelegram />
                     Написати в Telegram
-                  </a>
+                  </Button>
                 </div>
-              </p>{" "}
-              <p>Наші соціальні мережі:</p>
-              {socialItems.map((soc, idx) => (
-                <a
-                  href={soc.url}
-                  key={`social-${idx}`}
-                  className="mx-1 text-cyan-600 hover:underline"
-                  aria-label={soc.ariaLabel}
-                >
-                  {soc.name}
-                </a>
-              ))}
+              </div>
+
+              <div className="pt-4">
+                <p className="mb-2 text-sm text-neutral-500">Наші соціальні мережі:</p>
+                <div className="flex justify-center">
+                  <SocialLinks variant="hero" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <section className="py-10 relative">
-        <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-rose-200 opacity-50 blur-2xl rounded-full"></div>
-        <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-teak-200 opacity-50 blur-2xl rounded-full bottom-0 right-0"></div>
-        <h2 className="text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8">
+      <Section className="bg-gradient-to-b from-primary-50/50 to-white">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
+        
+        <SectionHeading>
           Торти Тататорт
-        </h2>
-        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
-          <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {cakes.map((el, idx) => (
-              <CategoryCard
-                data={el.node}
-                type="cake"
-                key={`cake-category-${idx}`}
-              />
-            ))}
-          </div>
+        </SectionHeading>
+        <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 relative z-10">
+          {cakes.map((el, idx) => (
+            <CategoryCard
+              data={el.node}
+              key={`cake-category-${idx}`}
+              loading="eager"
+            />
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="py-10">
-        <h2 className="text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8">
-          {" "}
+      <Section>
+        <SectionHeading className="mb-4 lg:mb-6">
           Начинки Тататорт
-        </h2>
-        <div className="text-center mb-6 lg:mb-8 lg:text-2xl text-lg">
-          <a href="/fillings/" className="text-cyan-600 hover:underline">
-            Дивитись всі начинки
-          </a>
+        </SectionHeading>
+        
+        <div className="text-center mb-8 lg:mb-12">
+          <Button 
+            to="/fillings/" 
+            variant="ghost" 
+            className="text-lg"
+          >
+            Дивитись всі начинки →
+          </Button>
         </div>
-        <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
-          <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {fillings.map((el, idx) => (
-              <LazyFillingCard data={el.node} key={`filling-category-${idx}`} />
-            ))}
-          </div>
+        
+        <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {fillings.map((el, idx) => (
+            <CategoryCard 
+              data={el.node} 
+              key={`filling-category-${idx}`} 
+              loading="lazy"
+            />
+          ))}
         </div>
-      </section>
+      </Section>
 
       <FAQ faqs={faqs} />
     </Layout>

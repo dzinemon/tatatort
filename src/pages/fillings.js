@@ -2,15 +2,14 @@ import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 import Layout from '../components/layout'
 import { Seo } from '../components/Seo';
 
 const socialItems = [
-  { name: <><FontAwesomeIcon icon={faInstagram} size="lg" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
-  { name: <><FontAwesomeIcon icon={faFacebook} size="lg" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
+  { name: <><FaInstagram className="text-xl" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
+  { name: <><FaFacebook className="text-xl" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
 ]
 
 export default function FillingsIndexPage({ data }) {
