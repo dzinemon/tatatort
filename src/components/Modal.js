@@ -73,10 +73,10 @@ export default function Modal({ setNext, setPrev, modalItem, open, children, onC
             </div>
 
             {/* Mobile Controls & Close Button */}
-            <div className="bg-white sm:hidden px-4 py-4 flex items-center justify-between sm:justify-end sm:px-6 border-t border-neutral-100">
+            <div className="bg-white flex items-center justify-between sm:justify-end  border-t border-neutral-100">
               
               {/* Mobile Navigation */}
-              <div className="flex gap-3 w-full">
+              <div className="flex sm:hidden gap-3 w-full sm:px-6 px-4 py-4">
                  <button 
                   onClick={setPrev}
                   type="button" 
