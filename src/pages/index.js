@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 
 import { FaTelegram, FaPhone } from "react-icons/fa6";
 
@@ -8,7 +7,6 @@ import Layout from "../components/layout";
 import { Seo } from "../components/Seo";
 import FAQ from "../components/FAQ";
 import Button from "../components/ui/Button";
-import Card from "../components/ui/Card";
 import Section from "../components/ui/Section";
 import SocialLinks from "../components/SocialLinks";
 import CategoryCard from "../components/ui/CategoryCard";
