@@ -1,20 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 import { Seo } from '../components/Seo';
-
-const socialItems = [
-  { name: <><FaInstagram className="text-xl" /> Instagram </>, url: "https://www.instagram.com/tatatort/" },
-  { name: <><FaFacebook className="text-xl" /> Facebook </>, url: "https://www.facebook.com/Tatatort/" }
-]
+import SocialLinks from '../components/SocialLinks';
 
 export default function FillingsIndexPage({ data }) {
   const allFillings = data.fillings.edges.map(el => el.node)
-  
+
   return (
     <Layout>
       <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
@@ -22,16 +16,16 @@ export default function FillingsIndexPage({ data }) {
           <div className="w-full max-w-2xl text-center">
             <h1 className='font-poiret lg:text-6xl text-4xl'>Начинки Тататорт</h1>
             <p className="mb-8 lg:mb-10 opacity-80 text-sm">Оригінальні торти на замовлення у Києві</p>
-            <div className='space-y-5 lg:text-lg max-w-2xl mx-auto'>
-              <p>Замовити начинки та торти:
-                {" "}
-              {socialItems.map((soc, idx) => <a href={soc.url} key={`social-${idx}`} className='mx-1 text-cyan-600 hover:underline'>{soc.name}</a>)}
-              </p>
+            <div className="pt-4">
+              <p className="mb-2 text-sm text-neutral-500">Наші соціальні мережі:</p>
+              <div className="flex justify-center">
+                <SocialLinks variant="hero" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       {
         allFillings.map((el, idx) => {
           return (
@@ -40,19 +34,19 @@ export default function FillingsIndexPage({ data }) {
               <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-teak-200 opacity-50 blur-2xl rounded-full bottom-0 right-0"></div>
               <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'>{el.title}</h2>
               <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
-              
+
                 <div className="grid gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {
                     el.images.map((img, idx) => {
                       return (
                         <div className='relative group shadow-lg flex flex-col' key={`filling-category-item-${idx}`}>
                           <div className='bg-gradient-to-r relative from-blue-200 to-cyan-200 aspect-square rounded-t-lg overflow-hidden' key={`images-${idx}`}>
-                            <GatsbyImage 
-                              objectFit='cover' 
-                              imgClassName='object-center' 
-                              className='aspect-square h-full w-full transition-transform duration-300 group-hover:scale-105' 
-                              image={img.gatsbyImageData} 
-                              alt={`${ img.title && img.title } ${img.description && img.description}`}
+                            <GatsbyImage
+                              objectFit='cover'
+                              imgClassName='object-center'
+                              className='aspect-square h-full w-full transition-transform duration-300 group-hover:scale-105'
+                              image={img.gatsbyImageData}
+                              alt={`${img.title && img.title} ${img.description && img.description}`}
                               loading="lazy"
                             />
                           </div>
@@ -66,7 +60,7 @@ export default function FillingsIndexPage({ data }) {
                   }
                 </div>
               </div>
-              
+
             </section>
           )
         }
@@ -78,7 +72,7 @@ export default function FillingsIndexPage({ data }) {
 
 export const Head = ({ data }) => {
   // Create products array for schema from all filling categories
-  const products = data.fillings.edges.flatMap(edge => 
+  const products = data.fillings.edges.flatMap(edge =>
     edge.node.images.map((image, index) => ({
       name: image.title || `${edge.node.title} ${index + 1}`,
       description: image.description || `${image.title || edge.node.title} - начинка від Тататорт`,
