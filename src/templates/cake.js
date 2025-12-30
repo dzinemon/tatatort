@@ -56,7 +56,7 @@ export default function CakesPage({ data }) {
             images.map((el, idx, arr) => {
               return (
                 <div className='relative group' key={`cake-${idx}`}>
-                  <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square shadow-lg rounded-lg overflow-hidden' key={`images-${idx}`}>
+                  <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square shadow-lg rounded-lg overflow-hidden group-hover:scale-[1.05] duration-500' key={`images-${idx}`}>
                     <GatsbyImage 
                       objectFit='cover' 
                       imgClassName='object-center' 
@@ -66,7 +66,7 @@ export default function CakesPage({ data }) {
                       loading="lazy"
                     />
                   </div>
-                  <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded bg-white/20 backdrop-blur-xs' onClick={() => {
+                  <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded scale-[0.75] group-hover:scale-[1.05] delay-200 duration-500' onClick={() => {
                     setModalOpen(true)
                     setModalItem(idx)
                     } }>
@@ -81,7 +81,7 @@ export default function CakesPage({ data }) {
 
       
         <Modal modalItem={modalItem} setNext={handleNextClick} setPrev={handlePrevClick} open={modalOpen} onClose={() => setModalOpen(false)}>
-          <img src={`${images[modalItem].file.url}`} className='max-w-full max-h-full' width={images[modalItem].file.details.image.width} height={images[modalItem].file.details.image.width} alt={`${images[modalItem].title}`}/>
+          <img src={`${images[modalItem].file.url}`} className='max-w-full w-auto max-h-[85vh]' width={images[modalItem].file.details.image.width} height={images[modalItem].file.details.image.width} alt={`${images[modalItem].title}`}/>
         </Modal>
 
       <div >

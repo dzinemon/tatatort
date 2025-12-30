@@ -11,7 +11,7 @@ export default function FillingsIndexPage({ data }) {
 
   return (
     <Layout>
-      <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
+      <div className="container pt-12 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
             <h1 className='font-poiret lg:text-6xl text-4xl'>Начинки Тататорт</h1>
@@ -29,7 +29,7 @@ export default function FillingsIndexPage({ data }) {
       {
         allFillings.map((el, idx) => {
           return (
-            <section className="py-10 relative" key={`filling-category-section-${idx}`}>
+            <section className="pb-10 relative" key={`filling-category-section-${idx}`}>
               <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-rose-200 opacity-50 blur-2xl rounded-full"></div>
               <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-teak-200 opacity-50 blur-2xl rounded-full bottom-0 right-0"></div>
               <h2 className='text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8'>{el.title}</h2>
@@ -50,8 +50,8 @@ export default function FillingsIndexPage({ data }) {
                               loading="lazy"
                             />
                           </div>
-                          <div className='space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-4 rounded-b-lg'>
-                            <h3 className='text-lg lg:text-2xl font-poiret'>{img.title}</h3>
+                          <div className='space-y-3 lg:space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-2.5 lg:p-4 rounded-b-lg'>
+                            <h3 className='text-lg lg:text-2xl font-poiret leading-tight'>{img.title}</h3>
                             <p className='font-light text-sm lg:text-base'> {img.description}</p>
                           </div>
                         </div>

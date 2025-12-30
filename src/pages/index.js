@@ -43,7 +43,7 @@ export default function IndexPage({ data }) {
 
   return (
     <Layout>
-      <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
+      <div className="container pt-12 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center px-4">
             <h1 className="font-poiret lg:text-7xl text-5xl mb-4 text-neutral-900">Тататорт</h1>
@@ -218,6 +218,7 @@ export const query = graphql`
             )
             title
             description
+            width
           }
         }
       }
@@ -242,6 +243,7 @@ export const query = graphql`
             )
             title
             description
+            width
           }
         }
       }

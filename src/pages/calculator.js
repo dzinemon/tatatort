@@ -21,7 +21,7 @@ export default function CalculatorPage({ data }) {
 
   return (
     <Layout>
-      <div className="container py-20 lg:py-28">
+      <div className="container py-12 md:py-16 lg:py-20">
         <div className="text-center mb-10">
           <h1 className="font-poiret text-4xl lg:text-6xl mb-4">Калькулятор вартості</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">

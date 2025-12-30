@@ -6,7 +6,7 @@ import { Seo } from "../components/Seo"
 const NotFoundPage = () => {
   return (
     <Layout>
-      <div className="container pt-16 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
+      <div className="container pt-12 lg:pt-20 xl:pt-28 pb-10 lg:pb-16 xl:pb-20">
         <div className="flex flex-wrap items-center justify-center -mx-4">
           <div className="w-full max-w-2xl text-center">
             <h1 className='font-poiret lg:text-6xl text-4xl'>Сторінку не знайдено</h1>

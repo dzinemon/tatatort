@@ -72,8 +72,8 @@ export default function FillingPage({ data }) {
                         <ArrowsPointingOutIcon className="h-12 w-12 text-white" />
                     </button>
                   </div>
-                  <div className='space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-4 rounded-b-lg'>
-                  <p className='text-lg lg:text-2xl font-poiret'>{el.title}</p>
+                  <div className='space-y-3 lg:space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-2.5 lg:p-4 rounded-b-lg'>
+                  <p className='text-lg lg:text-2xl font-poiret leading-tight'>{el.title}</p>
                   <p className='font-light text-sm lg:text-base'> {el.description}</p>
                   </div>
                 </div>
