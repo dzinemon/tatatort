@@ -125,7 +125,7 @@ const Navigation = ({ children }) => {
                                             setActiveItem={setActiveItem} 
                                         />
                                     )}
-                                    <li className="block lg:inline-block w-full lg:w-auto text-center border-b lg:border-none border-rose">
+                                    <li className="block lg:inline-block w-full lg:w-auto text-center border-b lg:border-none border-rose" role="none">
                                       <div className="px-6 lg:px-4 py-4 lg:py-7 flex justify-center h-full items-center">
                                         <SocialLinks variant="header" className="!gap-4" />
                                       </div>

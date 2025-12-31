@@ -138,7 +138,6 @@ const NavbarItem = ({ data, idx, activeItem, setActiveItem }) => {
                     : "w-1/2 md:w-1/2 lg:w-1/4"
                   }`}
                   key={`nav-${idx}`}
-                  role="none"
                 >
                   <a
                   className="hover:bg-cyan-50 group border-2 border-transparent hover:border-cyan-100 bg-backdrop-blur-xl text-slate-800 w-full block rounded-lg xl:px-4 xl:py-3 px-3 py-2 focus-visible:bg-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
