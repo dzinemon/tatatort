@@ -24,7 +24,7 @@ const CategoryCard = ({ data, loading = "lazy", className = "" }) => {
       role="link"
       aria-label={`${data.title} - відкрити деталі`}
     >
-      <a href={`/${data.slug}`} className="block h-full">
+      <a href={`/${data.slug}/`} className="block h-full">
         <div className="relative aspect-square overflow-hidden rounded-t-xl bg-gradient-to-r from-primary-100 to-primary-50">
           {image && (
             <GatsbyImage
