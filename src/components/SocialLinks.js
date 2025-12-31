@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-const SocialLinks = ({ variant = "footer", className = "" }) => {
+const SocialLinks = ({ variant = "footer", className = "", itemRole = null }) => {
   const isFooter = variant === "footer";
 
   const baseClasses = "transition-all duration-300 transform hover:scale-110 flex items-center gap-2 group font-poiret";
@@ -52,6 +52,7 @@ const SocialLinks = ({ variant = "footer", className = "" }) => {
           rel="noopener noreferrer"
           aria-label={link.ariaLabel}
           className={`${baseClasses} ${colorClasses}`}
+          role={itemRole}
         >
           {link.icon}
           <span>{link.name}</span>

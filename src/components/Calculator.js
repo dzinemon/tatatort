@@ -59,7 +59,7 @@ const Calculator = ({ fillingGroups }) => {
       <div className="space-y-8">
         {/* Weight */}
         <div>
-          <label htmlFor="weight" className="block text-neutral-700 font-bold mb-3">
+          <label id="weight-label" htmlFor="weight" className="block text-neutral-700 font-bold mb-3">
             Вага (кг) - Мінімум {MIN_WEIGHT} кг
           </label>
           <div className="flex items-center gap-4">
@@ -71,6 +71,7 @@ const Calculator = ({ fillingGroups }) => {
               step="0.5"
               value={weight}
               onChange={(e) => setWeight(parseFloat(e.target.value))}
+              aria-labelledby="weight-label"
               className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-500"
             />
             <input
