@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 const variants = {
-  primary: 'bg-primary-600 text-white hover:bg-primary-700 border border-transparent shadow-sm',
+  primary: 'bg-primary-700 text-white hover:bg-primary-800 border border-transparent shadow-sm',
   secondary: 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200 border border-transparent',
-  outline: 'bg-transparent border border-primary-600 text-primary-600 hover:bg-primary-50',
-  ghost: 'bg-transparent text-primary-600 hover:bg-primary-50 hover:underline',
+  outline: 'bg-transparent border border-primary-700 text-primary-700 hover:bg-primary-50',
+  ghost: 'bg-transparent text-primary-700 hover:bg-primary-50 hover:underline',
 };
 
 const sizes = {

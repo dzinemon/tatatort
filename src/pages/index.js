@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-import { FaTelegram, FaPhone } from "react-icons/fa6";
+import { FaTelegramPlane, FaPhone } from "react-icons/fa";
 
 import Layout from "../components/layout";
 import { Seo } from "../components/Seo";
@@ -18,7 +18,7 @@ export default function IndexPage({ data }) {
 
   // FAQ data
   const faqs = [
-        {
+    {
       question: "За скільки часу потрібно замовляти торт?",
       answer:
         "Рекомендуємо замовляти торт мінімум за 2-3 дні до потрібної дати, для складних дизайнів - за тиждень.",
@@ -54,7 +54,7 @@ export default function IndexPage({ data }) {
               <p>
                 Професійне виготовлення тортів на замовлення в Києві. Поєднання вишуканого смаку та сучасного дизайну. Ексклюзивний декор, натуральні інгредієнти та ваші найяскравіші емоції – це Тататорт!
               </p>
-              
+
               <div className="flex flex-col items-center gap-6 mt-8">
                 <span className="font-medium text-neutral-900">Замовити торт або кендібар:</span>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
@@ -68,17 +68,17 @@ export default function IndexPage({ data }) {
                     <FaPhone />
                     Зателефонувати
                   </Button>
-                  
+
                   <Button
                     href="https://t.me/TataUtekhina"
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="secondary"
+                    variant="outline"
                     size="lg"
                     aria-label="Написати в Telegram"
                     className="w-full sm:w-auto"
                   >
-                    <FaTelegram />
+                    <FaTelegramPlane />
                     Написати в Telegram
                   </Button>
                 </div>
@@ -98,7 +98,7 @@ export default function IndexPage({ data }) {
       <Section className="bg-gradient-to-b from-primary-50/50 to-white">
         <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
-        
+
         <SectionHeading>
           Торти Тататорт
         </SectionHeading>
@@ -117,22 +117,22 @@ export default function IndexPage({ data }) {
         <SectionHeading className="mb-4 lg:mb-6">
           Начинки Тататорт
         </SectionHeading>
-        
+
         <div className="text-center mb-8 lg:mb-12">
-          <Button 
-            to="/fillings/" 
-            variant="ghost" 
+          <Button
+            to="/fillings/"
+            variant="ghost"
             className="text-lg"
           >
             Дивитись всі начинки →
           </Button>
         </div>
-        
+
         <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {fillings.map((el, idx) => (
-            <CategoryCard 
-              data={el.node} 
-              key={`filling-category-${idx}`} 
+            <CategoryCard
+              data={el.node}
+              key={`filling-category-${idx}`}
               loading="lazy"
             />
           ))}
@@ -191,7 +191,7 @@ export const Head = ({ data }) => {
       pageType="WebPage"
       products={products}
       faqs={faqs}
-      // reviews={reviews}
+    // reviews={reviews}
     />
   );
 };
