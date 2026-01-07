@@ -2,62 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-/* body {
-  font-family: 'Poiret One', sans-serif;
-} */
+/* ========================================
+   Global Styles
+   ======================================== */
 
 html, body {
   height: fit-content;
   width: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-gradient-to-br from-rose-100 via-slate-100 to-teal-100 font-roboto 
-  /* @apply bg-gradient-to-tl from-blue-100 via-blue-50 to-cyan-100 font-roboto  */
-  /* @apply bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 font-roboto  */
+  @apply bg-gradient-to-br from-secondary-50 via-neutral-50 to-primary-50 font-roboto;
+  min-height: 100vh;
 }
+
+/* ========================================
+   Floating Navbar Styles
+   ======================================== */
+
+/* Glassmorphism utility classes */
+.glass {
+  @apply bg-white/60 backdrop-blur-xl border border-white/40;
+}
+
+.glass-hover {
+  @apply hover:bg-white/80 hover:shadow-lg hover:shadow-primary-500/10;
+}
+
+/* Navbar container - adds space for floating design */
+main {
+  @apply pt-16 lg:pt-24;
+}
+
+/* Floating isle button styles */
+.nav-isle {
+  @apply relative px-5 py-2.5 rounded-xl font-medium text-sm;
+  @apply backdrop-blur-sm border border-transparent;
+  @apply transition-all duration-300 ease-out;
+}
+
+.nav-isle:hover {
+  @apply bg-white/60 border-white/50 shadow-md shadow-primary-200/30;
+}
+
+.nav-isle.active {
+  @apply bg-gradient-to-r from-primary-100 to-secondary-50;
+  @apply text-primary-700 shadow-md shadow-primary-200/50;
+  @apply border-primary-100/50;
+}
+
+/* Dropdown glassmorphism panel */
+.dropdown-glass {
+  @apply bg-white/80 backdrop-blur-2xl;
+  @apply border border-white/50;
+  @apply shadow-xl shadow-primary-500/10;
+  @apply rounded-2xl;
+}
+
+/* Dropdown item styles */
+.dropdown-item {
+  @apply p-4 rounded-xl;
+  @apply bg-gradient-to-br from-white/60 to-primary-50/40;
+  @apply border border-transparent;
+  @apply transition-all duration-300 ease-out;
+}
+
+.dropdown-item:hover {
+  @apply from-primary-50 to-secondary-50/50;
+  @apply border-primary-200/50;
+  @apply shadow-md shadow-primary-100/50;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   Animation Utilities
+   ======================================== */
+
+/* Smooth transitions for navbar state changes */
+.nav-transition {
+  @apply transition-all duration-500 ease-out;
+}
+
+/* Gradient divider */
+.gradient-divider {
+  @apply h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent;
+}
+
+/* ========================================
+   Responsive Adjustments
+   ======================================== */
+
+@media (max-width: 1023px) {
+  main {
+    @apply pt-20;
+  }
+  
+  .mobile-nav-glass {
+    @apply bg-white/95 backdrop-blur-xl;
+  }
+}
+
+/* ========================================
+   Focus States for Accessibility
+   ======================================== */
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2;
+  @apply focus-visible:ring-primary-400 focus-visible:ring-offset-2;
+}
+
+/* ========================================
+   Legacy Support (deprecated - remove after testing)
+   ======================================== */
 
 .dr-dwn {
   @apply max-h-0 overflow-hidden opacity-0;
   transition: max-height 0.5s ease-in-out, opacity 0.2s ease-in;
 }
 
-.is-active > .dr-dwn{
+.is-active > .dr-dwn {
   @apply max-h-screen opacity-100;
-}
-
-#navbar {
-  transition: all 100ms ease-in-out;
-  @apply bg-gradient-to-r from-rose-100 to-slate-100 shadow;
-  /* @apply bg-gradient-to-br from-blue-100 via-blue-50 to-cyan-100 shadow; */
-  /* background-color: transparent; */
-}
-
-.nav-bg-white #navbar {
-  @apply bg-slate-900;
-}
-
-@media (max-width: 1024px) {
-  
-  #navbar {
-    @apply bg-gray-900;
-  }
-  .navbar-item {
-    @apply text-yellow-900
-  }
-}
-
-.navbar-item {
-  @apply text-yellow-900;
-}
-
-.navbar-item:hover {
-  opacity: 0.6;
-}
-
-
-.nav-bg-white .navbar-item  {
-  color: red;
 }

@@ -1,28 +1,47 @@
 import React, { useRef } from "react";
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { motion, AnimatePresence } from "framer-motion";
 import useOutsideClick from "../utils/outside-click";
 
-const NavbarItem = ({ data, idx, activeItem, setActiveItem }) => {
+// Nav item style variants (following Button.js pattern)
+const navVariants = {
+  primary: 'bg-primary-700 text-white hover:bg-primary-800 border border-transparent shadow-sm',
+  secondary: 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200 border border-transparent',
+  outline: 'bg-transparent border border-primary-700 text-primary-700 hover:bg-primary-50',
+  ghost: 'bg-transparent text-neutral-700 hover:bg-primary-50 hover:text-primary-700',
+  active: 'bg-primary-700 text-white border border-transparent shadow-sm',
+};
+
+const navSizes = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-6 py-3 text-base',
+};
+
+const NavbarItem = ({ data, idx, activeItem, setActiveItem, isMobile = false }) => {
   const isActive = data.name === activeItem;
   const subItems = data.subItems || null;
   const currentEl = useRef(null);
   
+  // Base styles following Button.js pattern
+  const baseStyles = 'inline-flex items-center font-medium rounded-md transition-all duration-200 gap-2 cursor-pointer';
+  const focusStyles = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2';
+  
   // Handle click for mobile navigation
   const onClick = (e) => {
-    if (window.innerWidth < 1024) {
-      if (e.target === currentEl.current) {
-        if (isActive) {
-          setActiveItem("");
-        } else {
-          setActiveItem(data.name);
-        }
+    if (isMobile || window.innerWidth < 1024) {
+      e.preventDefault();
+      if (isActive) {
+        setActiveItem("");
+      } else {
+        setActiveItem(data.name);
       }
     }
   };
   
   // Handle hover for desktop navigation
   const onHover = () => {
-    if (window.innerWidth >= 1024) {
+    if (!isMobile && window.innerWidth >= 1024) {
       setActiveItem(data.name);
     }
   };
@@ -34,18 +53,19 @@ const NavbarItem = ({ data, idx, activeItem, setActiveItem }) => {
   
   // Handle blur for accessibility
   const onBlur = (e) => {
-    if (!currentEl.current.contains(e.target)) {
-      setActiveItem("");
+    if (!currentEl.current?.contains(e.relatedTarget)) {
+      setTimeout(() => {
+        if (!currentEl.current?.contains(document.activeElement)) {
+          setActiveItem("");
+        }
+      }, 100);
     }
   };
 
   // Handle mouse leave for desktop
-  const onLeave = (e) => {
-    if (window.innerWidth >= 1024) {
-      if (
-        e.target !== currentEl.current &&
-        currentEl.current.contains(e.target)
-      ) {
+  const onLeave = () => {
+    if (!isMobile && window.innerWidth >= 1024) {
+      if (!subItems) {
         setActiveItem("");
       }
     }
@@ -58,112 +78,187 @@ const NavbarItem = ({ data, idx, activeItem, setActiveItem }) => {
     }
   });
 
-  // For simple links without dropdown
-  if (subItems == null) {
+  // Animation variants for floating isle
+  const isleVariants = {
+    initial: { scale: 1 },
+    hover: { 
+      scale: 1.02,
+      transition: { duration: 0.2, ease: "easeOut" }
+    },
+    tap: { scale: 0.98 }
+  };
+
+  // Mobile dropdown animation
+  const mobileDropdownVariants = {
+    closed: { 
+      height: 0, 
+      opacity: 0,
+      transition: { duration: 0.25, ease: "easeInOut" }
+    },
+    open: { 
+      height: "auto", 
+      opacity: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
+    }
+  };
+
+  // For simple links without dropdown (Desktop)
+  if (subItems == null && !isMobile) {
     return (
-      <li className="block lg:border-none border-b border-rose lg:inline-block w-full lg:w-auto text-center" role="none">
-        <a
-          className={`${
-            isActive ? "text-cyan-600" : "text-slate-900"
-          } inline-block hover:opacity-80 w-full px-6 lg:px-6 py-4 lg:py-7 leading-tight text-left border-b lg:border-none border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`}
+      <li className="list-none" role="none">
+        <motion.a
+          className={`
+            ${baseStyles}
+            ${isActive ? navVariants.active : navVariants.ghost}
+            ${navSizes.md}
+            ${focusStyles}
+          `}
           href={data.url}
           ref={currentEl}
-          onMouseOver={onHover}
+          onMouseEnter={onHover}
           onMouseLeave={onLeave}
           onFocus={onFocus}
           onBlur={onBlur}
-          onClick={onClick}
+          role="menuitem"
+          aria-label={data.ariaLabel || data.name}
+          variants={isleVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+        >
+          {data.name}
+        </motion.a>
+      </li>
+    );
+  }
+
+  // For simple links without dropdown (Mobile)
+  if (subItems == null && isMobile) {
+    return (
+      <motion.li 
+        className="list-none" 
+        role="none"
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: idx * 0.05 }}
+      >
+        <a
+          className={`
+            ${baseStyles} w-full justify-start
+            ${isActive ? navVariants.active : navVariants.ghost}
+            ${navSizes.md}
+          `}
+          href={data.url}
           role="menuitem"
           aria-label={data.ariaLabel || data.name}
         >
           {data.name}
         </a>
+      </motion.li>
+    );
+  }
+
+  // For dropdown menus (Desktop) - Only renders the trigger button
+  if (!isMobile) {
+    return (
+      <li className="list-none" role="none" ref={currentEl}>
+        <motion.button
+          className={`
+            ${baseStyles}
+            ${isActive ? navVariants.active : navVariants.ghost}
+            ${navSizes.md}
+            ${focusStyles}
+          `}
+          onMouseEnter={onHover}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          aria-expanded={isActive}
+          aria-haspopup="true"
+          role="menuitem"
+          variants={isleVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+        >
+          {data.name}
+          <motion.span 
+            className="w-4 h-4"
+            animate={{ rotate: isActive ? 180 : 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <ChevronDownIcon className="w-4 h-4" />
+          </motion.span>
+        </motion.button>
       </li>
     );
   }
 
-  // For dropdown menus
+  // For dropdown menus (Mobile)
   return (
-    <li
-      className={`${
-        isActive ? `is-active bg-cyan-50` : ``
-      } block lg:border-none border-b border-rose lg:inline-block w-full lg:w-auto text-center`}
-      ref={currentEl}
-      onMouseOver={onHover}
-      onMouseLeave={onLeave}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onClick={onClick}
+    <motion.li 
+      className="list-none" 
       role="none"
+      ref={currentEl}
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: idx * 0.05 }}
     >
       <button
-        className={`${
-          idx === 0 ? "lg:px-6" : "lg:px-6"
-        } ${
-          isActive ? "text-cyan-600" : "text-slate-900"
-        } px-6 text-left hover:opacity-80 w-full lg:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 py-4 lg:py-7 leading-tight border-b lg:border-none border-white pointer-events-none lg:pointer-events-auto`}
+        className={`
+          ${baseStyles} w-full justify-between
+          ${isActive ? navVariants.active : navVariants.ghost}
+          ${navSizes.md}
+        `}
+        onClick={onClick}
         aria-expanded={isActive}
         aria-haspopup="true"
         role="menuitem"
       >
-        {data.name}{" "}
-        <span className="inline-block float-right" aria-hidden="true">
-          <span className={`w-3.5 h-3.5 mt-1.5 ${isActive ? 'rotate-180' : ''} transition-transform duration-200`}>
-            <ChevronDownIcon />
-          </span>
-        </span>
+        {data.name}
+        <motion.span 
+          className="w-4 h-4"
+          animate={{ rotate: isActive ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <ChevronDownIcon className="w-4 h-4" />
+        </motion.span>
       </button>
-      <div 
-        className={`${isActive ? "max-h-screen" : "max-h-0"} lg:absolute lg:left-0 right-0 text-left lg:top-21 dr-dwn overflow-hidden transition-all duration-300`}
-        role="menu"
-        aria-label={`${data.name} submenu`}
-      >
-        <div className="container lg:rounded-xl bg-white/90 backdrop-blur-xl p-2 md:p-4 lg:p-5 xl:p-6">
-          <div
-            className="text-sdv-dark mx-auto max-w-3xl lg:pb-3 text-center font-poiret leading-tight text-xl hidden lg:block"
-            dangerouslySetInnerHTML={{ __html: data.text }}
-          />
-          <div className="max-w-3xl h-0.5 bg-gradient-to-br from-rose-100 via-slate-100 to-teal-100 mx-auto my-4 hidden lg:block"></div>
-          <div className="flex flex-wrap -mx-2">
-            {Array.from(subItems).map((item, idx, arr) => {
-                return (
-                <div
-                  className={`px-2 ${
-                  arr.length % 5 === 0
-                    ? "w-1/2 md:w-1/4 lg:w-1/5"
-                    : arr.length % 2 === 0
-                    ? "w-1/2 md:w-1/2 lg:w-1/4"
-                    : arr.length % 3 === 0
-                    ? "w-1/2 md:w-1/3 lg:w-1/3"
-                    : "w-1/2 md:w-1/2 lg:w-1/4"
-                  }`}
-                  key={`nav-${idx}`}
-                >
-                  <a
-                  className="hover:bg-cyan-50 group border-2 border-transparent hover:border-cyan-100 bg-backdrop-blur-xl text-slate-800 w-full block rounded-lg xl:px-4 xl:py-3 px-3 py-2 focus-visible:bg-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
-                  href={`${item.url}`}
+      
+      {/* Mobile Dropdown */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            className="overflow-hidden"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={mobileDropdownVariants}
+            role="menu"
+            aria-label={`${data.name} submenu`}
+          >
+            <div className="pl-2 pr-1 py-1.5 space-y-0.5">
+              {subItems.map((item, subIdx) => (
+                <motion.a
+                  key={subIdx}
+                  href={item.url}
+                  className={`
+                    ${baseStyles} w-full justify-start
+                    ${navSizes.sm}
+                    bg-transparent text-neutral-600 hover:bg-primary-50 hover:text-primary-700
+                  `}
                   role="menuitem"
-                  >
-                  <div className={`flex justify-start items-center -mx-2`}>
-                    {item.icon && <div className="w-auto px-2 text-2xl font-bold" aria-hidden="true">
-                    {item.icon}
-                    </div>}
-                    <div className={`${isActive ? "translate-x-0" : "opacity-0 translate-x-2" } delay-200 duration-300 transition-all w-auto px-2 xl:text-xl mb-2 group-focus-visible:text-cyan-900 group-hover:text-cyan-800 duration-200`}>
-                    {item.title}
-                    </div>
-                  </div>
-                  <div
-                    className={`${isActive ? "translate-x-0" : "opacity-0 translate-x-3"} delay-300 duration-500 transition-all text-sm xl:text-base group-focus-visible:text-cyan-800 group-hover:text-cyan-700`}
-                    dangerouslySetInnerHTML={{ __html: item.text }}
-                  />
-                  </a>
-                </div>
-                );
-            })}
-          </div>
-        </div>
-      </div>
-    </li>
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.03 * subIdx }}
+                >
+                  {item.title}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.li>
   );
 };
 
