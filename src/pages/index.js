@@ -95,7 +95,7 @@ export default function IndexPage({ data }) {
         </div>
       </div>
 
-      <Section className="bg-gradient-to-b from-primary-50/50 to-white">
+      <Section className="">
         <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
 

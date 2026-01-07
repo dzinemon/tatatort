@@ -51,13 +51,13 @@ const FAQItem = ({ faq, index }) => {
 
 const FAQ = ({ faqs }) => {
   return (
-    <section className="py-10 relative">
-      <div className="absolute lg:block hidden w-56 h-96 transform -rotate-12 bg-yellow-200 opacity-50 blur-2xl rounded-full right-10"></div>
-      <div className="absolute lg:block hidden w-56 h-96 transform rotate-12 bg-pink-200 opacity-50 blur-2xl rounded-full bottom-0 left-10"></div>
+    <section className="py-12 lg:py-20 relative">
+      <div className="absolute lg:block hidden w-56 h-96 transform -rotate-12 bg-yellow-200 opacity-50 blur-3xl rounded-full right-10"></div>
+      <div className="absolute lg:block hidden w-56 h-64 transform rotate-12 bg-pink-200 opacity-50 blur-3xl rounded-full bottom-20 left-10"></div>
       <h2 className="text-center font-poiret lg:text-5xl text-3xl mb-6 lg:mb-8">
         Часті питання і відповіді
       </h2>
-      <div className="container p-4 md:p-6 lg:p-10 rounded-xl backdrop-blur-sm bg-white/30">
+      <div className="container">
         <div className="max-w-4xl mx-auto space-y-4 lg:space-y-6">
           {faqs.map((faq, idx) => (
             <FAQItem key={`faq-${idx}`} faq={faq} index={idx} />
