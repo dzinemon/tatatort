@@ -3,6 +3,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useOutsideClick from '../utils/outside-click';
 import { ChevronDownIcon, CakeIcon } from '@heroicons/react/24/solid';
 import Button from './ui/Button';
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 const BASE_PRICE = 1200; // UAH per kg
 const MIN_WEIGHT = 2.5; // kg
@@ -19,6 +20,9 @@ const Calculator = ({ fillingGroups }) => {
   const [decor, setDecor] = useState(DECOR_LEVELS[0].id);
   const [delivery, setDelivery] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const motionPrice = useMotionValue(totalPrice);
+  const springPrice = useSpring(motionPrice, { stiffness: 170, damping: 26 });
+  const [displayPrice, setDisplayPrice] = useState(totalPrice);
   
   // Custom Dropdown State
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -31,6 +35,19 @@ const Calculator = ({ fillingGroups }) => {
     const baseTotal = (weight * BASE_PRICE) + decorPrice;
     setTotalPrice(baseTotal);
   }, [weight, filling, decor]);
+
+  // sync motion value when totalPrice updates
+  useEffect(() => {
+    motionPrice.set(totalPrice);
+  }, [totalPrice, motionPrice]);
+
+  // update the displayed (rounded) value as the spring animates
+  useEffect(() => {
+    const unsubscribe = springPrice.on("change", (latest) => {
+      setDisplayPrice(Math.round(latest));
+    });
+    return unsubscribe;
+  }, [springPrice]);
 
   const handleWeightChange = (e) => {
     let val = parseFloat(e.target.value);
@@ -204,7 +221,7 @@ const Calculator = ({ fillingGroups }) => {
             <div className="text-center md:text-left">
               <p className="text-sm text-neutral-500 mb-1">Орієнтовна вартість:</p>
               <p className="text-4xl font-poiret font-bold text-neutral-900">
-                {totalPrice} - {totalPrice + 300} грн
+                <motion.span>{displayPrice}</motion.span> грн
               </p>
             </div>
             

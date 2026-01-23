@@ -57,14 +57,16 @@ export default function CakesPage({ data }) {
               return (
                 <div className='relative group' key={`cake-${idx}`}>
                   <div className='bg-gradient-to-r from-blue-200 to-cyan-200 aspect-square shadow-lg rounded-lg overflow-hidden group-hover:scale-[1.05] duration-500' key={`images-${idx}`}>
-                    <GatsbyImage 
-                      objectFit='cover' 
-                      imgClassName='object-center' 
-                      className='aspect-square h-full w-full' 
-                      image={el.gatsbyImageData} 
-                      alt={`${ el.title && el.title } ${el.description && el.description}`}
-                      loading="lazy"
-                    />
+                    {el.gatsbyImageData && (
+                      <GatsbyImage 
+                        objectFit='cover' 
+                        imgClassName='object-center' 
+                        className='aspect-square h-full w-full' 
+                        image={el.gatsbyImageData} 
+                        alt={`${ el.title && el.title } ${el.description && el.description}`}
+                        loading="lazy"
+                      />
+                    )}
                   </div>
                   <button className='absolute group-hover:opacity-100 opacity-0 inset-0 duration-200 flex items-center justify-center rounded scale-[0.75] group-hover:scale-[1.05] delay-200 duration-500' onClick={() => {
                     setModalOpen(true)

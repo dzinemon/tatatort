@@ -41,14 +41,16 @@ export default function FillingsIndexPage({ data }) {
                       return (
                         <div className='relative group shadow-lg flex flex-col' key={`filling-category-item-${idx}`}>
                           <div className='bg-gradient-to-r relative from-blue-200 to-cyan-200 aspect-square rounded-t-lg overflow-hidden' key={`images-${idx}`}>
-                            <GatsbyImage
-                              objectFit='cover'
-                              imgClassName='object-center'
-                              className='aspect-square h-full w-full transition-transform duration-300 group-hover:scale-105'
-                              image={img.gatsbyImageData}
-                              alt={`${img.title && img.title} ${img.description && img.description}`}
-                              loading="lazy"
-                            />
+                            {img.gatsbyImageData && (
+                              <GatsbyImage
+                                objectFit='cover'
+                                imgClassName='object-center'
+                                className='aspect-square h-full w-full transition-transform duration-300 group-hover:scale-105'
+                                image={img.gatsbyImageData}
+                                alt={`${img.title && img.title} ${img.description && img.description}`}
+                                loading="lazy"
+                              />
+                            )}
                           </div>
                           <div className='space-y-3 lg:space-y-4 flex-grow bg-white/60 backdrop-blur-sm p-2.5 lg:p-4 rounded-b-lg'>
                             <h3 className='text-lg lg:text-2xl font-poiret leading-tight'>{img.title}</h3>

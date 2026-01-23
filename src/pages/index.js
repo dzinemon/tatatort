@@ -107,7 +107,7 @@ export default function IndexPage({ data }) {
             <CategoryCard
               data={el.node}
               key={`cake-category-${idx}`}
-              loading="eager"
+              loading={idx === 0 ? "eager" : "lazy"}
             />
           ))}
         </div>
@@ -210,11 +210,13 @@ export const query = graphql`
           title
           images {
             gatsbyImageData(
-              width: 400
-              height: 400
+              width: 320
+              height: 320
               quality: 70
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
+              sizes: "(min-width: 1024px) 400px, 100vw"
+              breakpoints: [320, 480, 768, 1024]
             )
             title
             description
@@ -235,11 +237,13 @@ export const query = graphql`
           title
           images {
             gatsbyImageData(
-              width: 282
-              height: 282
+              width: 300
+              height: 300
               quality: 70
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
+              sizes: "(min-width: 768px) 282px, 100vw"
+              breakpoints: [300, 480, 768, 1024]
             )
             title
             description
